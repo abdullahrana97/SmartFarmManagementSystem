@@ -82,14 +82,14 @@ namespace SmartFarmManagementSystem
 
         private void btndashboard_Click(object sender, EventArgs e)
         {
-            btndashboard.BackColor = Color.FromArgb(144, 238, 144);
-           LoadForm(new DashBoard());
+            btndashboard.BackColor = Color.FromArgb(34, 139, 34);
+            LoadForm(new DashBoard());
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             btnfarmandfields.BackColor = Color.FromArgb(34, 139, 34);
-           LoadForm(new Farm());
+           LoadForm(new FarmField());
         }
 
         private void btnPlantation_Click(object sender, EventArgs e)
@@ -120,6 +120,34 @@ namespace SmartFarmManagementSystem
         private void btnreports_Click(object sender, EventArgs e)
         {
             btnreports.BackColor = Color.FromArgb(34, 139, 34);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Do you want to Logout ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                LoginInfo.userid = -1;
+                LoginInfo.role = "";
+                LoginInfo.username = "";
+                this.Hide();
+                Login login = new Login();
+                login.Show();
+                this.Close();
+            }
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Do you want to Exit ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                LoginInfo.userid = -1;
+                                LoginInfo.role = "";
+                LoginInfo.username = "";
+                Application.Exit();
+            }
         }
     }
 }

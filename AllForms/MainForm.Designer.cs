@@ -99,6 +99,7 @@
             this.button1.TabIndex = 1;
             this.button1.Text = "Exit";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -114,6 +115,7 @@
             this.button2.TabIndex = 2;
             this.button2.Text = "Logout";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // panel2
             // 
@@ -271,7 +273,7 @@
             this.btnfarmandfields.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnfarmandfields.Size = new System.Drawing.Size(238, 70);
             this.btnfarmandfields.TabIndex = 1;
-            this.btnfarmandfields.Text = "🌾  Farm & Fields";
+            this.btnfarmandfields.Text = "🌾  Farm && Fields";
             this.btnfarmandfields.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnfarmandfields.UseVisualStyleBackColor = true;
             this.btnfarmandfields.Click += new System.EventHandler(this.button4_Click);

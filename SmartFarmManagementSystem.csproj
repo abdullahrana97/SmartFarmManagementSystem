@@ -108,17 +108,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AllClasses\FarmBL.cs" />
+    <Compile Include="AllClasses\FieldBL.cs" />
     <Compile Include="AllForms\DashBoard.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AllForms\DashBoard.Designer.cs">
       <DependentUpon>DashBoard.cs</DependentUpon>
     </Compile>
-    <Compile Include="AllForms\Farm.cs">
+    <Compile Include="AllForms\FarmField.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AllForms\Farm.Designer.cs">
-      <DependentUpon>Farm.cs</DependentUpon>
+    <Compile Include="AllForms\FarmField.Designer.cs">
+      <DependentUpon>FarmField.cs</DependentUpon>
     </Compile>
     <Compile Include="AllForms\Login.cs">
       <SubType>Form</SubType>
@@ -145,8 +146,8 @@
     <EmbeddedResource Include="AllForms\DashBoard.resx">
       <DependentUpon>DashBoard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AllForms\Farm.resx">
-      <DependentUpon>Farm.cs</DependentUpon>
+    <EmbeddedResource Include="AllForms\FarmField.resx">
+      <DependentUpon>FarmField.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AllForms\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
