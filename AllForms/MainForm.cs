@@ -95,6 +95,7 @@ namespace SmartFarmManagementSystem
         private void btnPlantation_Click(object sender, EventArgs e)
         {
             btnPlantation.BackColor = Color.FromArgb(34, 139, 34);
+            MainForm.LoadForm(new Plantation());
         }
 
         private void button3_Click(object sender, EventArgs e)

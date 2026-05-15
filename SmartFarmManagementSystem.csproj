@@ -109,6 +109,7 @@
   <ItemGroup>
     <Compile Include="AllClasses\FarmBL.cs" />
     <Compile Include="AllClasses\FieldBL.cs" />
+    <Compile Include="AllClasses\PlantationBL.cs" />
     <Compile Include="AllForms\DashBoard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,6 +134,12 @@
     <Compile Include="AllForms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AllForms\Plantation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\Plantation.Designer.cs">
+      <DependentUpon>Plantation.cs</DependentUpon>
+    </Compile>
     <Compile Include="AllForms\SignUp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -154,6 +161,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AllForms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\Plantation.resx">
+      <DependentUpon>Plantation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AllForms\SignUp.resx">
       <DependentUpon>SignUp.cs</DependentUpon>
