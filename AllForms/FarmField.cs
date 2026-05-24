@@ -168,29 +168,20 @@ namespace SmartFarmManagementSystem.AllForms
 
         public void loadfields()
         {
+          
             string query;
 
             if (LoginInfo.role.ToLower() == "admin")
-                query = @"SELECT f.FieldID, f.Name, f.Area, 
-                  fm.Name AS FarmName,
-                  s.TypeName AS SoilType 
-                  FROM field f 
-                  INNER JOIN farm fm ON f.FarmID = fm.FarmID 
-                  INNER JOIN soiltype s ON f.SoilTypeID = s.SoilTypeID";
+                query = "SELECT * FROM vw_FieldDetails";
             else
-                query = @"SELECT f.FieldID, f.Name, f.Area, 
-                  fm.Name AS FarmName,
-                  s.TypeName AS SoilType 
-                  FROM field f 
-                  INNER JOIN farm fm ON f.FarmID = fm.FarmID 
-                  INNER JOIN soiltype s ON f.SoilTypeID = s.SoilTypeID
-                  WHERE fm.FarmerID = " + LoginInfo.userid;
+                query = "SELECT * FROM vw_FieldDetails WHERE FarmName IN " +
+                        "(SELECT Name FROM farm WHERE FarmerID = " + LoginInfo.userid + ")";
 
             using (MySqlConnection con = DataBaseHelper.getconnection())
             {
                 try
                 {
-                    
+                 
                     MySqlDataAdapter adp = new MySqlDataAdapter(query, con);
                     DataTable dt = new DataTable();
                     adp.Fill(dt);
@@ -201,10 +192,9 @@ namespace SmartFarmManagementSystem.AllForms
                     MessageBox.Show("Error: " + ex.Message);
                 }
             }
-
-
-
         }
+
+
 
         public void loadcombofarms()
         {

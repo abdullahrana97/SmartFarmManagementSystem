@@ -101,11 +101,13 @@ namespace SmartFarmManagementSystem
         private void button3_Click(object sender, EventArgs e)
         {
             btnworkers.BackColor = Color.FromArgb(34, 139, 34);
+            MainForm.LoadForm(new WorkerTask());
         }
 
         private void btnfertilizer_Click(object sender, EventArgs e)
         {
             btnfertilizer.BackColor = Color.FromArgb(34, 139, 34);
+            MainForm.LoadForm(new Fertilizers());
         }
 
         private void btnsales_Click(object sender, EventArgs e)

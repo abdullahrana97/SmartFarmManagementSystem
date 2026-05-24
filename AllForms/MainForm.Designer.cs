@@ -34,7 +34,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
             this.btnreports = new System.Windows.Forms.Button();
             this.btnpayment = new System.Windows.Forms.Button();
             this.btnsales = new System.Windows.Forms.Button();
@@ -44,6 +43,7 @@
             this.btnfarmandfields = new System.Windows.Forms.Button();
             this.btndashboard = new System.Windows.Forms.Button();
             this.mainpanel = new System.Windows.Forms.Panel();
+            this.button4 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -57,7 +57,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1200, 71);
+            this.panel1.Size = new System.Drawing.Size(1215, 71);
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -65,7 +65,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(48, 15);
+            this.label1.Location = new System.Drawing.Point(403, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(404, 37);
             this.label1.TabIndex = 1;
@@ -77,7 +77,7 @@
             this.flowLayoutPanel1.Controls.Add(this.button2);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(964, 0);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(979, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(10, 12, 15, 0);
             this.flowLayoutPanel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -120,7 +120,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.Control;
-            this.panel2.Controls.Add(this.button3);
+            this.panel2.Controls.Add(this.button4);
             this.panel2.Controls.Add(this.btnreports);
             this.panel2.Controls.Add(this.btnpayment);
             this.panel2.Controls.Add(this.btnsales);
@@ -132,25 +132,9 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 71);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(238, 677);
+            this.panel2.Size = new System.Drawing.Size(238, 729);
             this.panel2.TabIndex = 2;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
-            // 
-            // button3
-            // 
-            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(0, 590);
-            this.button3.Name = "button3";
-            this.button3.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.button3.Size = new System.Drawing.Size(238, 70);
-            this.button3.TabIndex = 8;
-            this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.UseVisualStyleBackColor = true;
             // 
             // btnreports
             // 
@@ -165,7 +149,7 @@
             this.btnreports.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnreports.Size = new System.Drawing.Size(238, 70);
             this.btnreports.TabIndex = 7;
-            this.btnreports.Text = "📈 Reports";
+            this.btnreports.Text = "💳 Payments";
             this.btnreports.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnreports.UseVisualStyleBackColor = true;
             this.btnreports.Click += new System.EventHandler(this.btnreports_Click);
@@ -183,7 +167,7 @@
             this.btnpayment.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnpayment.Size = new System.Drawing.Size(238, 70);
             this.btnpayment.TabIndex = 6;
-            this.btnpayment.Text = "💳 Payments";
+            this.btnpayment.Text = "👨‍💼 Buyer";
             this.btnpayment.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnpayment.UseVisualStyleBackColor = true;
             this.btnpayment.Click += new System.EventHandler(this.btnpayment_Click);
@@ -201,7 +185,7 @@
             this.btnsales.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnsales.Size = new System.Drawing.Size(238, 70);
             this.btnsales.TabIndex = 5;
-            this.btnsales.Text = "💰 Sales";
+            this.btnsales.Text = "💰Harvest && Sales";
             this.btnsales.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnsales.UseVisualStyleBackColor = true;
             this.btnsales.Click += new System.EventHandler(this.btnsales_Click);
@@ -302,15 +286,32 @@
             this.mainpanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainpanel.Location = new System.Drawing.Point(238, 71);
             this.mainpanel.Name = "mainpanel";
-            this.mainpanel.Size = new System.Drawing.Size(962, 677);
+            this.mainpanel.Size = new System.Drawing.Size(977, 729);
             this.mainpanel.TabIndex = 3;
+            // 
+            // button4
+            // 
+            this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button4.FlatAppearance.BorderSize = 0;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.ForeColor = System.Drawing.Color.White;
+            this.button4.Location = new System.Drawing.Point(0, 590);
+            this.button4.Name = "button4";
+            this.button4.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.button4.Size = new System.Drawing.Size(238, 70);
+            this.button4.TabIndex = 9;
+            this.button4.Text = "📈 Reports";
+            this.button4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button4.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1200, 748);
+            this.ClientSize = new System.Drawing.Size(1215, 800);
             this.Controls.Add(this.mainpanel);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -343,8 +344,8 @@
         private System.Windows.Forms.Button btnfertilizer;
         private System.Windows.Forms.Button btnreports;
         private System.Windows.Forms.Button btnpayment;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Panel mainpanel;
+        private System.Windows.Forms.Button button4;
     }
 }
 

@@ -108,8 +108,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AllClasses\FarmBL.cs" />
+    <Compile Include="AllClasses\FertilizerApplicationBL.cs" />
+    <Compile Include="AllClasses\FertilizerBL.cs" />
+    <Compile Include="AllClasses\FertilizerStockBL.cs" />
     <Compile Include="AllClasses\FieldBL.cs" />
     <Compile Include="AllClasses\PlantationBL.cs" />
+    <Compile Include="AllClasses\TaskBL.cs" />
+    <Compile Include="AllClasses\WorkerBL.cs" />
+    <Compile Include="AllForms\Buyer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\Buyer.Designer.cs">
+      <DependentUpon>Buyer.cs</DependentUpon>
+    </Compile>
     <Compile Include="AllForms\DashBoard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +132,18 @@
     </Compile>
     <Compile Include="AllForms\FarmField.Designer.cs">
       <DependentUpon>FarmField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\Fertilizers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\Fertilizers.Designer.cs">
+      <DependentUpon>Fertilizers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AllForms\Harvest &amp; Sales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\Harvest &amp; Sales.Designer.cs">
+      <DependentUpon>Harvest &amp; Sales.cs</DependentUpon>
     </Compile>
     <Compile Include="AllForms\Login.cs">
       <SubType>Form</SubType>
@@ -146,15 +169,30 @@
     <Compile Include="AllForms\SignUp.Designer.cs">
       <DependentUpon>SignUp.cs</DependentUpon>
     </Compile>
+    <Compile Include="AllForms\WorkerTask.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllForms\WorkerTask.Designer.cs">
+      <DependentUpon>WorkerTask.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataBaseHelper.cs" />
     <Compile Include="LoginInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AllForms\Buyer.resx">
+      <DependentUpon>Buyer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AllForms\DashBoard.resx">
       <DependentUpon>DashBoard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AllForms\FarmField.resx">
       <DependentUpon>FarmField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\Fertilizers.resx">
+      <DependentUpon>Fertilizers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\Harvest &amp; Sales.resx">
+      <DependentUpon>Harvest &amp; Sales.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AllForms\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
@@ -167,6 +205,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AllForms\SignUp.resx">
       <DependentUpon>SignUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AllForms\WorkerTask.resx">
+      <DependentUpon>WorkerTask.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

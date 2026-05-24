@@ -1,11 +1,12 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
-using MySql.Data.MySqlClient;
 using System.Threading.Tasks;
-using System.Data;
+using System.Windows.Forms;
 
 namespace SmartFarmManagementSystem.AllClasses
 {
@@ -151,37 +152,26 @@ namespace SmartFarmManagementSystem.AllClasses
         public DataTable loaddgvplantations()
         {
             string query;
-
-            if (LoginInfo.role.ToLower() == "farmer")
-            {
-                query = $"Select p.PlantationId,c.Name as CropName,c.Season,f.Name as FieldName,fm.Name as FarmName,p.PlantingDate,p.ExpectedHarvestDate from plantation p join crop c on p.CropId = C.CropId  join field f on p.FieldId = f.FieldId join farm fm on f.FarmId = fm.FarmId where fm.FarmerId = "+ LoginInfo.userid;
-            }
-
+            if (LoginInfo.role.ToLower() == "admin")
+                query = "SELECT * FROM vw_PlantationDetails";
             else
-            {
-                query = $"Select p.PlantationId,c.Name as CropName,c.Season,f.Name as FieldName,fm.Name as FarmName,p.PlantingDate,p.ExpectedHarvestDate from plantation p join crop c on p.CropId = C.CropId  join field f on p.FieldId = f.FieldId join farm fm on f.FarmId = fm.FarmId";
-            }
+                query = "SELECT * FROM vw_PlantationDetails WHERE FarmerID = " + LoginInfo.userid;
 
-            using(MySqlConnection con = DataBaseHelper.getconnection())
+            using (MySqlConnection con = DataBaseHelper.getconnection())
             {
-
                 try
                 {
-                    MySqlCommand cmd = new MySqlCommand(query, con);
-
-                    MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
-
+                    con.Open();
+                    MySqlDataAdapter adp = new MySqlDataAdapter(query, con);
                     DataTable dt = new DataTable();
-
                     adp.Fill(dt);
-
                     return dt;
                 }
                 catch (Exception ex)
                 {
+                    MessageBox.Show("Error: " + ex.Message);
                     return null;
                 }
-
             }
         }
 

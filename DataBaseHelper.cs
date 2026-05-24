@@ -62,6 +62,17 @@ namespace SmartFarmManagementSystem
         }
 
 
+        public static void SetComboValue(ComboBox cmb, string valueMember, int id)
+        {
+            foreach (DataRowView row in cmb.Items)
+            {
+                if (Convert.ToInt32(row[valueMember]) == id)
+                {
+                    cmb.SelectedItem = row;
+                    return;
+                }
+            }
+        }
 
     }
 }
