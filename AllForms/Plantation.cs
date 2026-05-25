@@ -21,59 +21,74 @@ namespace SmartFarmManagementSystem.AllForms
             InitializeComponent();
         }
 
-
         int selectedplantationid = -1;
-        public void loadfields()
+        private void LoadFieldDropdown()
         {
             string query;
 
-            if (LoginInfo.role.ToLower() == "farmer")
-            {
-                query = $"Select field.Name as FieldName,FieldId from field inner join farm fm on field.farmid = fm.farmid inner join user u on fm.FarmerId = u.UserId where u.userid = " + LoginInfo.userid;
-
-            }
+            if (LoginInfo.role.ToLower() == "admin")
+                query = @"SELECT f.FieldID, CONCAT(fm.Name,' - ',f.Name) AS FieldName 
+                          FROM field f 
+                          INNER JOIN farm fm ON f.FarmID = fm.FarmID";
             else
+                query = @"SELECT f.FieldID, CONCAT(fm.Name,' - ',f.Name) AS FieldName 
+                          FROM field f 
+                          INNER JOIN farm fm ON f.FarmID = fm.FarmID 
+                          WHERE fm.FarmerID = " + LoginInfo.userid;
+
+            using (MySqlConnection con = DataBaseHelper.getconnection())
             {
-                query = $"Select field.Name as FieldName,FieldId from field inner join farm fm on field.farmid = fm.farmid inner join user u on fm.FarmerId = u.UserId ";
-            }
-
-            using (MySqlConnection conn = DataBaseHelper.getconnection())
-            {
-
-
                 try
                 {
-                    DataBaseHelper.FillComboBox(cmbfields, query, "FieldName", "FieldId");
-
+                    MySqlDataAdapter adp = new MySqlDataAdapter(query, con);
+                    DataTable dt = new DataTable();
+                    adp.Fill(dt);
+                    cmbfields.DisplayMember = "FieldName";
+                    cmbfields.ValueMember = "FieldID";
+                    cmbfields.DataSource = dt;
+                    cmbfields.SelectedIndex = -1;
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Error loading fields: " + ex.Message);
                 }
             }
         }
 
-        public void loadcrops()
+        // Load crops dropdown
+        private void LoadCropDropdown()
         {
-            string query = $"Select CropId,Name from crop";
-            using (MySqlConnection conn = DataBaseHelper.getconnection())
+            string query = "SELECT CropID, CONCAT(Name,' (',Season,')') AS CropName FROM crop";
+
+            using (MySqlConnection con = DataBaseHelper.getconnection())
             {
                 try
                 {
-                    DataBaseHelper.FillComboBox(cmbcrops, query, "Name", "CropId");
+                    MySqlDataAdapter adp = new MySqlDataAdapter(query, con);
+                    DataTable dt = new DataTable();
+                    adp.Fill(dt);
+                    cmbcrops.DisplayMember = "CropName";
+                    cmbcrops.ValueMember = "CropID";
+                    cmbcrops.DataSource = dt;
+                    cmbcrops.SelectedIndex = -1;
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Error loading crops: " + ex.Message);
                 }
             }
         }
 
         private void Plantation_Load(object sender, EventArgs e)
         {
-            loadcrops();
-            loadfields();
+            LoadCropDropdown();
+            LoadFieldDropdown();
             loadplantations();
+
+            cmbstatus.Items.Add("Active");
+            cmbstatus.Items.Add("Harvested");
+            cmbstatus.Items.Add("Failed");
+            cmbstatus.SelectedIndex = 0;
 
         }
 
@@ -82,7 +97,9 @@ namespace SmartFarmManagementSystem.AllForms
 
             int cropid = Convert.ToInt32(cmbcrops.SelectedValue);
             int fieldid = Convert.ToInt32(cmbfields.SelectedValue);
-            PlantationBL plantation = new PlantationBL(fieldid, cropid, dtpplantationdate.Value);
+            string status = cmbstatus.SelectedItem.ToString();
+
+            PlantationBL plantation = new PlantationBL(fieldid, cropid, dtpplantationdate.Value, status);
 
             if (plantation.checkinput())
             {
@@ -132,6 +149,7 @@ namespace SmartFarmManagementSystem.AllForms
                 selectedplantationid = Convert.ToInt32(row.Cells["PlantationID"].Value);
                 cmbfields.Text = row.Cells["FieldName"].Value.ToString();
                 cmbcrops.Text = row.Cells["CropName"].Value.ToString();
+                cmbstatus.Text = row.Cells["status"].Value.ToString();
                 dtpplantationdate.Value = Convert.ToDateTime(row.Cells["PlantingDate"].Value);
                 lblexpecteddate.Text = Convert.ToDateTime(row.Cells["ExpectedHarvestDate"].Value).ToString("dd MMM yyyy");
 
@@ -144,6 +162,7 @@ namespace SmartFarmManagementSystem.AllForms
 
             cmbfields.SelectedIndex = -1;
             cmbcrops.SelectedIndex = -1;
+            cmbstatus.SelectedIndex = -1;   
             dtpplantationdate.Value = DateTime.Now;
             lblexpecteddate.Text = "Auto Calculated";
 
@@ -156,7 +175,7 @@ namespace SmartFarmManagementSystem.AllForms
 
                 // jo mrzi constructor ko value de do doesnot matter this time as we delete on basis of plantationid
 
-                PlantationBL plantation = new PlantationBL(0, 0, DateTime.Now);
+                PlantationBL plantation = new PlantationBL(0, 0, DateTime.Now,"");
 
                 if (MessageBox.Show("Are you sure you want to delete this plantation?", "Confirm Deletion", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
@@ -185,7 +204,7 @@ namespace SmartFarmManagementSystem.AllForms
             //ConstructionCallvalues doesnot matter at this place
 
 
-            PlantationBL plantation = new PlantationBL(0, 0, DateTime.Now);
+            PlantationBL plantation = new PlantationBL(0, 0, DateTime.Now,"");
             dgvplantations.DataSource = plantation.loaddgvplantations();
         }
 
@@ -196,8 +215,9 @@ namespace SmartFarmManagementSystem.AllForms
 
             int cropid = cmbcrops.SelectedValue != null ? Convert.ToInt32(cmbcrops.SelectedValue) : 0;  
             int fieldid = cmbfields.SelectedValue != null ? Convert.ToInt32(cmbfields.SelectedValue) : 0;
+            string status = cmbstatus.SelectedItem != null ? cmbstatus.SelectedItem.ToString() : "";
 
-            PlantationBL plantation = new PlantationBL(fieldid,cropid, dtpplantationdate.Value);
+            PlantationBL plantation = new PlantationBL(fieldid,cropid, dtpplantationdate.Value, status);
 
             DateTime? harvestDate = plantation.gettingharvestdate();
 
@@ -211,5 +231,7 @@ namespace SmartFarmManagementSystem.AllForms
         {
             ClearFields();
         }
+
+
     }
 }

@@ -155,7 +155,7 @@ namespace SmartFarmManagementSystem.AllClasses
                 {
                 
                     MySqlCommand cmd = new MySqlCommand(
-                        "SELECT Role FROM worker WHERE WorkerID=@id", con);
+                        "SELECT WorkerRole FROM worker WHERE WorkerID=@id", con);
                     cmd.Parameters.AddWithValue("@id", workerid);
                     object result = cmd.ExecuteScalar();
                     return result != null ? result.ToString() : "";

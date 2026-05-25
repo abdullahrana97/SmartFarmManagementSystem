@@ -112,17 +112,20 @@ namespace SmartFarmManagementSystem
 
         private void btnsales_Click(object sender, EventArgs e)
         {
-            btnsales.BackColor = Color.FromArgb(34, 139, 34);
+            btnbuyer.BackColor = Color.FromArgb(34, 139, 34);
+            MainForm.LoadForm(new Buyer());
         }
 
         private void btnpayment_Click(object sender, EventArgs e)
         {
-            btnpayment.BackColor = Color.FromArgb(34, 139, 34);
+            btnharvestandsales.BackColor = Color.FromArgb(34, 139, 34);
+            MainForm.LoadForm(new Harvest___Sales());
         }
 
         private void btnreports_Click(object sender, EventArgs e)
         {
-            btnreports.BackColor = Color.FromArgb(34, 139, 34);
+            btnpayments.BackColor = Color.FromArgb(34, 139, 34);
+            MainForm.LoadForm(new Payment());
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -147,10 +150,16 @@ namespace SmartFarmManagementSystem
             if (result == DialogResult.Yes)
             {
                 LoginInfo.userid = -1;
-                                LoginInfo.role = "";
+                LoginInfo.role = "";
                 LoginInfo.username = "";
                 Application.Exit();
             }
+        }
+
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+            btnreports.BackColor = Color.FromArgb(34, 139, 34);
+
         }
     }
 }

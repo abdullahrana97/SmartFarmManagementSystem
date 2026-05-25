@@ -35,15 +35,15 @@
             this.button2 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnreports = new System.Windows.Forms.Button();
-            this.btnpayment = new System.Windows.Forms.Button();
-            this.btnsales = new System.Windows.Forms.Button();
+            this.btnpayments = new System.Windows.Forms.Button();
+            this.btnharvestandsales = new System.Windows.Forms.Button();
+            this.btnbuyer = new System.Windows.Forms.Button();
             this.btnfertilizer = new System.Windows.Forms.Button();
             this.btnworkers = new System.Windows.Forms.Button();
             this.btnPlantation = new System.Windows.Forms.Button();
             this.btnfarmandfields = new System.Windows.Forms.Button();
             this.btndashboard = new System.Windows.Forms.Button();
             this.mainpanel = new System.Windows.Forms.Panel();
-            this.button4 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -120,10 +120,10 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.Control;
-            this.panel2.Controls.Add(this.button4);
             this.panel2.Controls.Add(this.btnreports);
-            this.panel2.Controls.Add(this.btnpayment);
-            this.panel2.Controls.Add(this.btnsales);
+            this.panel2.Controls.Add(this.btnpayments);
+            this.panel2.Controls.Add(this.btnharvestandsales);
+            this.panel2.Controls.Add(this.btnbuyer);
             this.panel2.Controls.Add(this.btnfertilizer);
             this.panel2.Controls.Add(this.btnworkers);
             this.panel2.Controls.Add(this.btnPlantation);
@@ -144,51 +144,69 @@
             this.btnreports.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnreports.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnreports.ForeColor = System.Drawing.Color.White;
-            this.btnreports.Location = new System.Drawing.Point(0, 520);
+            this.btnreports.Location = new System.Drawing.Point(0, 590);
             this.btnreports.Name = "btnreports";
             this.btnreports.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnreports.Size = new System.Drawing.Size(238, 70);
-            this.btnreports.TabIndex = 7;
-            this.btnreports.Text = "💳 Payments";
+            this.btnreports.TabIndex = 9;
+            this.btnreports.Text = "📈 Reports";
             this.btnreports.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnreports.UseVisualStyleBackColor = true;
-            this.btnreports.Click += new System.EventHandler(this.btnreports_Click);
+            this.btnreports.Click += new System.EventHandler(this.button4_Click_1);
             // 
-            // btnpayment
+            // btnpayments
             // 
-            this.btnpayment.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnpayment.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnpayment.FlatAppearance.BorderSize = 0;
-            this.btnpayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnpayment.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnpayment.ForeColor = System.Drawing.Color.White;
-            this.btnpayment.Location = new System.Drawing.Point(0, 450);
-            this.btnpayment.Name = "btnpayment";
-            this.btnpayment.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnpayment.Size = new System.Drawing.Size(238, 70);
-            this.btnpayment.TabIndex = 6;
-            this.btnpayment.Text = "👨‍💼 Buyer";
-            this.btnpayment.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnpayment.UseVisualStyleBackColor = true;
-            this.btnpayment.Click += new System.EventHandler(this.btnpayment_Click);
+            this.btnpayments.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnpayments.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnpayments.FlatAppearance.BorderSize = 0;
+            this.btnpayments.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnpayments.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnpayments.ForeColor = System.Drawing.Color.White;
+            this.btnpayments.Location = new System.Drawing.Point(0, 520);
+            this.btnpayments.Name = "btnpayments";
+            this.btnpayments.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnpayments.Size = new System.Drawing.Size(238, 70);
+            this.btnpayments.TabIndex = 7;
+            this.btnpayments.Text = "💳 Payments";
+            this.btnpayments.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnpayments.UseVisualStyleBackColor = true;
+            this.btnpayments.Click += new System.EventHandler(this.btnreports_Click);
             // 
-            // btnsales
+            // btnharvestandsales
             // 
-            this.btnsales.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnsales.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnsales.FlatAppearance.BorderSize = 0;
-            this.btnsales.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnsales.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnsales.ForeColor = System.Drawing.Color.White;
-            this.btnsales.Location = new System.Drawing.Point(0, 380);
-            this.btnsales.Name = "btnsales";
-            this.btnsales.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnsales.Size = new System.Drawing.Size(238, 70);
-            this.btnsales.TabIndex = 5;
-            this.btnsales.Text = "💰Harvest && Sales";
-            this.btnsales.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnsales.UseVisualStyleBackColor = true;
-            this.btnsales.Click += new System.EventHandler(this.btnsales_Click);
+            this.btnharvestandsales.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnharvestandsales.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnharvestandsales.FlatAppearance.BorderSize = 0;
+            this.btnharvestandsales.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnharvestandsales.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnharvestandsales.ForeColor = System.Drawing.Color.White;
+            this.btnharvestandsales.Location = new System.Drawing.Point(0, 450);
+            this.btnharvestandsales.Name = "btnharvestandsales";
+            this.btnharvestandsales.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnharvestandsales.Size = new System.Drawing.Size(238, 70);
+            this.btnharvestandsales.TabIndex = 6;
+            this.btnharvestandsales.Text = "💰 Harvest && Sales";
+            this.btnharvestandsales.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnharvestandsales.UseVisualStyleBackColor = true;
+            this.btnharvestandsales.Click += new System.EventHandler(this.btnpayment_Click);
+            // 
+            // btnbuyer
+            // 
+            this.btnbuyer.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnbuyer.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnbuyer.FlatAppearance.BorderSize = 0;
+            this.btnbuyer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnbuyer.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnbuyer.ForeColor = System.Drawing.Color.White;
+            this.btnbuyer.Location = new System.Drawing.Point(0, 380);
+            this.btnbuyer.Name = "btnbuyer";
+            this.btnbuyer.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnbuyer.Size = new System.Drawing.Size(238, 70);
+            this.btnbuyer.TabIndex = 5;
+            this.btnbuyer.Text = "👨‍💼 Buyer";
+            this.btnbuyer.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnbuyer.UseVisualStyleBackColor = true;
+            this.btnbuyer.Click += new System.EventHandler(this.btnsales_Click);
             // 
             // btnfertilizer
             // 
@@ -289,23 +307,6 @@
             this.mainpanel.Size = new System.Drawing.Size(977, 729);
             this.mainpanel.TabIndex = 3;
             // 
-            // button4
-            // 
-            this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.Color.White;
-            this.button4.Location = new System.Drawing.Point(0, 590);
-            this.button4.Name = "button4";
-            this.button4.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.button4.Size = new System.Drawing.Size(238, 70);
-            this.button4.TabIndex = 9;
-            this.button4.Text = "📈 Reports";
-            this.button4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button4.UseVisualStyleBackColor = true;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -340,12 +341,12 @@
         private System.Windows.Forms.Button btnfarmandfields;
         private System.Windows.Forms.Button btnPlantation;
         private System.Windows.Forms.Button btnworkers;
-        private System.Windows.Forms.Button btnsales;
+        private System.Windows.Forms.Button btnbuyer;
         private System.Windows.Forms.Button btnfertilizer;
-        private System.Windows.Forms.Button btnreports;
-        private System.Windows.Forms.Button btnpayment;
+        private System.Windows.Forms.Button btnpayments;
+        private System.Windows.Forms.Button btnharvestandsales;
         private System.Windows.Forms.Panel mainpanel;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnreports;
     }
 }
 

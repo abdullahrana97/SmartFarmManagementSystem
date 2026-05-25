@@ -14,15 +14,16 @@ namespace SmartFarmManagementSystem.AllClasses
     {
         private int fieldid;
         private int cropid;
+        private string status;
         private DateTime plantingdate;
         private DateTime expectedharvestdate;
 
-        public PlantationBL(int fieldid, int cropid, DateTime plantingdate)
+        public PlantationBL(int fieldid, int cropid, DateTime plantingdate, string status)
         {
             this.fieldid = fieldid;
             this.cropid = cropid;
             this.plantingdate = plantingdate;
-
+            this.status = status;
         }
 
         public bool checkinput()
@@ -61,7 +62,7 @@ namespace SmartFarmManagementSystem.AllClasses
         {
             gettingharvestdate();
 
-            string query = "Insert into plantation (FieldId,CropId,PlantingDate,ExpectedHarvestDate) values (@fieldid,@cropid,@plantingdate,@expectedharvestdate)";
+            string query = "Insert into plantation (FieldId,CropId,PlantingDate,ExpectedHarvestDate,status) values (@fieldid,@cropid,@plantingdate,@expectedharvestdate,@status)";
             using (MySqlConnection conn = DataBaseHelper.getconnection())
             {
                 MySqlTransaction transaction = null;
@@ -74,6 +75,7 @@ namespace SmartFarmManagementSystem.AllClasses
                     cmd.Parameters.AddWithValue("@cropid", this.cropid);
                     cmd.Parameters.AddWithValue("@plantingdate", this.plantingdate);
                     cmd.Parameters.AddWithValue("@expectedharvestdate",this. expectedharvestdate);
+                    cmd.Parameters.AddWithValue("@status", this.status);
 
                     cmd.ExecuteNonQuery();
 
@@ -98,7 +100,7 @@ namespace SmartFarmManagementSystem.AllClasses
 
             gettingharvestdate();
 
-            string query = "Update plantation set FieldId = @fieldid, CropId = @cropid, PlantingDate = @plantingdate, ExpectedHarvestDate = @expectedharvestdate where PlantationId = @plantationid";
+            string query = "Update plantation set FieldId = @fieldid, CropId = @cropid, PlantingDate = @plantingdate, ExpectedHarvestDate = @expectedharvestdate, status = @status where PlantationId = @plantationid";
             using (MySqlConnection conn = DataBaseHelper.getconnection())
             {
                 MySqlTransaction transaction = null;
@@ -113,6 +115,7 @@ namespace SmartFarmManagementSystem.AllClasses
                     cmd.Parameters.AddWithValue("@fieldid", this.fieldid);
                     cmd.Parameters.AddWithValue("@cropid", this.cropid);
                     cmd.Parameters.AddWithValue("@plantingdate", this.plantingdate);
+                    cmd.Parameters.AddWithValue("@status", this.status);
                     cmd.Parameters.AddWithValue("@expectedharvestdate", this.expectedharvestdate);
                     cmd.Parameters.AddWithValue("@plantationid", plantationid);
                     cmd.ExecuteNonQuery();
@@ -153,15 +156,14 @@ namespace SmartFarmManagementSystem.AllClasses
         {
             string query;
             if (LoginInfo.role.ToLower() == "admin")
-                query = "SELECT * FROM vw_PlantationDetails";
+                query = "SELECT * FROM vw_plantationdetails";
             else
-                query = "SELECT * FROM vw_PlantationDetails WHERE FarmerID = " + LoginInfo.userid;
+                query = "SELECT * FROM vw_plantationdetails WHERE FarmerID = " + LoginInfo.userid;
 
             using (MySqlConnection con = DataBaseHelper.getconnection())
             {
                 try
                 {
-                    con.Open();
                     MySqlDataAdapter adp = new MySqlDataAdapter(query, con);
                     DataTable dt = new DataTable();
                     adp.Fill(dt);

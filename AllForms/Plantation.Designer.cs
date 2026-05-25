@@ -41,6 +41,8 @@
             this.btndelete = new System.Windows.Forms.Button();
             this.btnclear = new System.Windows.Forms.Button();
             this.btnsave = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cmbstatus = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvplantations)).BeginInit();
             this.SuspendLayout();
@@ -48,6 +50,8 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.LightGray;
+            this.groupBox1.Controls.Add(this.cmbstatus);
+            this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.lblexpecteddate);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.dtpplantationdate);
@@ -194,6 +198,25 @@
             this.btnsave.UseVisualStyleBackColor = false;
             this.btnsave.Click += new System.EventHandler(this.btnsave_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(385, 155);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(67, 28);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "Status";
+            // 
+            // cmbstatus
+            // 
+            this.cmbstatus.AccessibleRole = System.Windows.Forms.AccessibleRole.WhiteSpace;
+            this.cmbstatus.FormattingEnabled = true;
+            this.cmbstatus.Location = new System.Drawing.Point(390, 205);
+            this.cmbstatus.MaxDropDownItems = 100;
+            this.cmbstatus.Name = "cmbstatus";
+            this.cmbstatus.Size = new System.Drawing.Size(167, 36);
+            this.cmbstatus.TabIndex = 9;
+            // 
             // Plantation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -231,5 +254,7 @@
         private System.Windows.Forms.Button btnsave;
         private System.Windows.Forms.Label lblexpecteddate;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cmbstatus;
+        private System.Windows.Forms.Label label5;
     }
 }
