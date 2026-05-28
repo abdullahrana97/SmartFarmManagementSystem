@@ -88,7 +88,7 @@ namespace SmartFarmManagementSystem.AllForms
             LoadHarvestDropdown();
             LoadBuyerDropdown();
             LoadSales();
-            this.reportViewer1.RefreshReport();
+           
         }
 
         private void btnsave_Click(object sender, EventArgs e)

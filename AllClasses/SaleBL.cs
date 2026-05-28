@@ -54,7 +54,7 @@ namespace SmartFarmManagementSystem.AllClasses
                     cmd1.Parameters.AddWithValue("@d", saledate);
                     cmd1.ExecuteNonQuery();
 
-                    long saleid = cmd1.LastInsertedId; // use long not int
+                    long saleid = cmd1.LastInsertedId;
 
                     MySqlCommand cmd2 = new MySqlCommand(
                         @"INSERT INTO payment (SaleID, Amount, PaymentDate, Method)
@@ -70,7 +70,7 @@ namespace SmartFarmManagementSystem.AllClasses
                 catch (Exception ex)
                 {
                     transaction?.Rollback();
-                    MessageBox.Show("Sale error: " + ex.Message); // show exact error
+                    MessageBox.Show("Sale error: " + ex.Message); 
                     return false;
                 }
             }

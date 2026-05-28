@@ -159,6 +159,7 @@ namespace SmartFarmManagementSystem
         private void button4_Click_1(object sender, EventArgs e)
         {
             btnreports.BackColor = Color.FromArgb(34, 139, 34);
+            MainForm.LoadForm(new AllReports());
 
         }
     }

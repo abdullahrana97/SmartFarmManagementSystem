@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.dtptodate = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
             this.dtpfromdate = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.cmbreport = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.dtptodate = new System.Windows.Forms.DateTimePicker();
             this.btngeneratereport = new System.Windows.Forms.Button();
             this.btnclear = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
@@ -57,6 +57,24 @@
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Report Generation";
+            // 
+            // dtptodate
+            // 
+            this.dtptodate.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtptodate.Location = new System.Drawing.Point(426, 306);
+            this.dtptodate.Name = "dtptodate";
+            this.dtptodate.Size = new System.Drawing.Size(200, 29);
+            this.dtptodate.TabIndex = 9;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(421, 252);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(75, 25);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "To Date";
             // 
             // dtpfromdate
             // 
@@ -95,24 +113,6 @@
             this.label6.TabIndex = 0;
             this.label6.Text = "Select Report";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(421, 252);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(75, 25);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "To Date";
-            // 
-            // dtptodate
-            // 
-            this.dtptodate.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtptodate.Location = new System.Drawing.Point(426, 306);
-            this.dtptodate.Name = "dtptodate";
-            this.dtptodate.Size = new System.Drawing.Size(200, 29);
-            this.dtptodate.TabIndex = 9;
-            // 
             // btngeneratereport
             // 
             this.btngeneratereport.BackColor = System.Drawing.Color.MediumSeaGreen;
@@ -124,6 +124,7 @@
             this.btngeneratereport.TabIndex = 25;
             this.btngeneratereport.Text = "Generate Report";
             this.btngeneratereport.UseVisualStyleBackColor = false;
+            this.btngeneratereport.Click += new System.EventHandler(this.btngeneratereport_Click);
             // 
             // btnclear
             // 
@@ -148,6 +149,7 @@
             this.Controls.Add(this.groupBox2);
             this.Name = "AllReports";
             this.Text = "AllReports";
+            this.Load += new System.EventHandler(this.AllReports_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
