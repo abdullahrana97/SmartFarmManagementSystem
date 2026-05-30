@@ -34,8 +34,11 @@ namespace SmartFarmManagementSystem.AllClasses
         public bool updatePayment(int paymentid)
         {
             string query = @"UPDATE payment SET 
-                            Amount=@a, Method=@m, PaymentDate=@d 
-                            WHERE PaymentID=@id";
+                    Amount = Amount + @a, 
+                    Method = @m, 
+                    PaymentDate = @d 
+                    WHERE PaymentID = @id";
+
             using (MySqlConnection con = DataBaseHelper.getconnection())
             {
                 try
@@ -58,13 +61,19 @@ namespace SmartFarmManagementSystem.AllClasses
 
         public DataTable loadPayments()
         {
-            string query = @"SELECT p.PaymentID, p.SaleID,
-                            b.Name AS Buyer,
-                            p.Amount, p.Method, p.PaymentDate
-                            FROM payment p
-                            JOIN sale s ON p.SaleID = s.SaleID
-                            JOIN buyer b ON s.BuyerID = b.BuyerID
-                            ORDER BY p.PaymentDate DESC";
+            string query = @"SELECT 
+                    p.PaymentID, 
+                    p.SaleID,
+                    b.Name AS Buyer,
+                    (s.Quantity * s.Price) AS TotalAmount,
+                    p.Amount, 
+                    p.Method, 
+                    p.PaymentDate
+                    FROM payment p
+                    JOIN sale s ON p.SaleID = s.SaleID
+                    JOIN buyer b ON s.BuyerID = b.BuyerID
+                    ORDER BY p.PaymentDate DESC";
+
             using (MySqlConnection con = DataBaseHelper.getconnection())
             {
                 try

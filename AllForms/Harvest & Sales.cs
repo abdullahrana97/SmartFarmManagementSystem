@@ -83,7 +83,6 @@ namespace SmartFarmManagementSystem.AllForms
         private void Harvest___Sales_Load(object sender, EventArgs e)
         {
             LoadPlantationDropdown();
-            LoadsalesPlantationDropdown();
             LoadHarvests();
             LoadHarvestDropdown();
             LoadBuyerDropdown();
@@ -314,46 +313,10 @@ namespace SmartFarmManagementSystem.AllForms
         }
         private void Sales_Click(object sender, EventArgs e)
         {
-            LoadsalesPlantationDropdown();
+            
         }
 
-        private void LoadsalesPlantationDropdown()
-        {
-            string query;
-            if (LoginInfo.role.ToLower() == "admin")
-                query = @"SELECT p.PlantationID,
-                  CONCAT(c.Name,' - ',f.Name) AS PlantationName
-                  FROM plantation p
-                  JOIN crop c ON p.CropID = c.CropID
-                  JOIN field f ON p.FieldID = f.FieldID";
-            else
-                query = @"SELECT p.PlantationID,
-                  CONCAT(c.Name,' - ',f.Name) AS PlantationName
-                  FROM plantation p
-                  JOIN crop c ON p.CropID = c.CropID
-                  JOIN field f ON p.FieldID = f.FieldID
-                  JOIN farm fm ON f.FarmID = fm.FarmID
-                  WHERE fm.FarmerID = " + LoginInfo.userid;
-
-            using (MySqlConnection con = DataBaseHelper.getconnection())
-            {
-                try
-                {
-                    MySqlDataAdapter adp = new MySqlDataAdapter(query, con);
-                    DataTable dt = new DataTable();
-                    adp.Fill(dt);
-
-                    cmbsplantation.DisplayMember = "PlantationName";
-                    cmbsplantation.ValueMember = "PlantationID";
-                    cmbsplantation.DataSource = dt;
-                    cmbsplantation.SelectedIndex = -1;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error: " + ex.Message);
-                }
-            }
-        }
+      
 
         private void buttsave_Click_1(object sender, EventArgs e)
         {
@@ -401,5 +364,7 @@ namespace SmartFarmManagementSystem.AllForms
         {
             CalculateTotal();
         }
+
+    
     }
 }

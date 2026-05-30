@@ -81,23 +81,33 @@ namespace SmartFarmManagementSystem.AllForms
                     Convert.ToInt32(row.Cells["SaleID"].Value));
                 txtamount.Text = row.Cells["Amount"].Value.ToString();
                 cmbmethods.Text = row.Cells["Method"].Value.ToString();
+                dtppaymentdate.Value = Convert.ToDateTime(row.Cells["PaymentDate"].Value);
+
                 if (e.RowIndex >= 0)
                 {
- 
-                    string method = row.Cells["Method"].Value.ToString();
 
-                    if (method == "Pending")
+                    // compare paid amount vs total amount
+                    decimal paidAmount = Convert.ToDecimal(row.Cells["Amount"].Value);
+                    decimal totalAmount = Convert.ToDecimal(row.Cells["TotalAmount"].Value);
+
+                    if (row.Cells["Method"].Value.ToString() == "Pending")
                     {
                         lblpaymentstatus.ForeColor = Color.Red;
                         lblpaymentstatus.Text = "Status: UNPAID";
                     }
+                    else if (paidAmount < totalAmount)
+                    {
+                        lblpaymentstatus.ForeColor = Color.Orange;
+                        lblpaymentstatus.Text = "Status: PARTIALLY PAID" +
+                            " (Remaining: Rs. " + (totalAmount - paidAmount).ToString("N2") + ")";
+                    }
                     else
                     {
                         lblpaymentstatus.ForeColor = Color.Green;
-                        lblpaymentstatus.Text = "Status: PAID";
+                        lblpaymentstatus.Text = "Status: FULLY PAID";
                     }
                 }
-                dtppaymentdate.Value = Convert.ToDateTime(row.Cells["PaymentDate"].Value);
+                   
             }
         }
 
@@ -126,40 +136,56 @@ namespace SmartFarmManagementSystem.AllForms
                 return;
             }
 
-            if (cmbsales.SelectedValue == null ||
-                string.IsNullOrEmpty(txtamount.Text) ||
+            if (string.IsNullOrEmpty(txtamount.Text) ||
                 string.IsNullOrEmpty(cmbmethods.Text))
             {
                 MessageBox.Show("Please fill all fields.");
                 return;
             }
 
-            decimal amount;
-            if (!decimal.TryParse(txtamount.Text, out amount) || amount <= 0)
+            decimal newPayment = Convert.ToDecimal(txtamount.Text);
+            decimal totalAmount = Convert.ToDecimal(dgvpayments.CurrentRow.Cells["TotalAmount"].Value);
+            decimal alreadyPaid = Convert.ToDecimal(dgvpayments.CurrentRow.Cells["Amount"].Value);
+            decimal remaining = totalAmount - alreadyPaid;
+
+            if (newPayment <= 0)
             {
-                MessageBox.Show("Please enter valid amount.");
+                MessageBox.Show("Amount must be greater than zero.");
                 return;
+            }
+
+            if (newPayment > remaining)
+            {
+                MessageBox.Show("You are trying to pay Rs. " + newPayment.ToString("N2") +
+                                " but remaining amount is only Rs. " + remaining.ToString("N2"));
+                return;
+            }
+
+            if (newPayment < remaining)
+            {
+                DialogResult result = MessageBox.Show(
+                    "Paying Rs. " + newPayment.ToString("N2") +
+                    " out of remaining Rs. " + remaining.ToString("N2") +
+                    ". Still partial. Continue?",
+                    "Partial Payment",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+
+                if (result == DialogResult.No) return;
             }
 
             PaymentBL bl = new PaymentBL(
                 Convert.ToInt32(cmbsales.SelectedValue),
-                amount,
+                newPayment,
                 cmbmethods.Text,
                 dtppaymentdate.Value);
 
-            string currentMethod = dgvpayments.CurrentRow.Cells["Method"].Value.ToString();
-            if (currentMethod != "Pending")
-            {
-                MessageBox.Show("This payment is already processed and cannot be changed.");
-                return;
-            }
-
             if (bl.updatePayment(selectedpaymentid))
             {
-                MessageBox.Show("Payment updated!");
+                MessageBox.Show("Payment updated! Total paid: Rs. " + (alreadyPaid + newPayment).ToString("N2"));
                 ClearFields();
                 LoadPayments();
             }
         }
-    }
+        }
 }

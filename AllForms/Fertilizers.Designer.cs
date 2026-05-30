@@ -221,7 +221,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1216, 872);
+            this.tabPage2.Size = new System.Drawing.Size(1217, 872);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Fertilizer Stock";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -272,7 +272,7 @@
             this.dgvfertilizerstock.Name = "dgvfertilizerstock";
             this.dgvfertilizerstock.RowHeadersWidth = 62;
             this.dgvfertilizerstock.RowTemplate.Height = 28;
-            this.dgvfertilizerstock.Size = new System.Drawing.Size(1210, 164);
+            this.dgvfertilizerstock.Size = new System.Drawing.Size(1211, 164);
             this.dgvfertilizerstock.TabIndex = 15;
             this.dgvfertilizerstock.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvfertilizerstock_CellClick);
             // 
@@ -337,9 +337,9 @@
             this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(31, 146);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(165, 25);
+            this.label4.Size = new System.Drawing.Size(148, 25);
             this.label4.TabIndex = 2;
-            this.label4.Text = "Quantity Available";
+            this.label4.Text = "Quantity To Add";
             // 
             // label5
             // 
@@ -361,7 +361,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 29);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1216, 872);
+            this.tabPage3.Size = new System.Drawing.Size(1217, 872);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Fertlizer Applications";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -411,7 +411,7 @@
             this.dgvapplication.Name = "dgvapplication";
             this.dgvapplication.RowHeadersWidth = 62;
             this.dgvapplication.RowTemplate.Height = 28;
-            this.dgvapplication.Size = new System.Drawing.Size(1210, 164);
+            this.dgvapplication.Size = new System.Drawing.Size(1211, 164);
             this.dgvapplication.TabIndex = 20;
             this.dgvapplication.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvapplication_CellClick);
             // 

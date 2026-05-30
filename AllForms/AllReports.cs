@@ -46,7 +46,7 @@ namespace SmartFarmManagementSystem.AllForms
             cmbreport.Items.Add("Fertilizer Stock Report");
             cmbreport.Items.Add("Buyer Purchase Report");
             cmbreport.Items.Add("Payment Report");
-            cmbreport.Items.Add("Farm Expense Report");
+            cmbreport.Items.Add("Fertilizer Application Report");
             cmbreport.SelectedIndex = 0;
         
     }
@@ -61,7 +61,7 @@ namespace SmartFarmManagementSystem.AllForms
                 GenerateHarvestReport();
              else if (selected == "Plantation Report")
                  GeneratePlantationReport();
-            /*  else if (selected == "Worker Task Report")
+              else if (selected == "Worker Task Report")
                  GenerateTaskReport();
              else if (selected == "Farm Summary Report")
                  GenerateFarmSummaryReport();
@@ -72,7 +72,12 @@ namespace SmartFarmManagementSystem.AllForms
              else if (selected == "Buyer Purchase Report")
                  GenerateBuyerReport();
              else if (selected == "Payment Report")
-                 GeneratePaymentReport();*/
+                 GeneratePaymentReport();
+            else if (selected == "Fertilizer Application Report")
+                 GenerateFertilizerApplicationReport();
+             else
+                MessageBox.Show("Please select a report type.");
+
         }
 
 
@@ -187,7 +192,230 @@ namespace SmartFarmManagementSystem.AllForms
             }
 
          ShowReport(dt, "dsplantation", "PlantationReport.rdlc");
-        } 
+        }
 
+
+        // =====FieldReport=========
+        private void GenerateFieldReport()
+        {
+            DataTable dt = new DataTable();
+            using (MySqlConnection con = DataBaseHelper.getconnection())
+            {
+                try
+                {
+                    string query;
+                    if (LoginInfo.role.ToLower() == "admin")
+                        query = "SELECT * FROM vw_FieldDetails";
+                    else
+                        query = @"SELECT * FROM vw_FieldDetails WHERE FarmName IN 
+                          (SELECT Name FROM farm WHERE FarmerID = "+ LoginInfo.userid + ")";
+
+                    MySqlDataAdapter adp = new MySqlDataAdapter(query, con);
+                    adp.Fill(dt);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                    return;
+                }
+            }
+            ShowReport(dt, "dsField", "FieldReport.rdlc");
+        }
+
+        private void GenerateTaskReport()
+        {
+            DataTable dt = new DataTable();
+            using (MySqlConnection con = DataBaseHelper.getconnection())
+            {
+                try
+                {
+                    string query;
+                    if (LoginInfo.role.ToLower() == "admin")
+                        query = "SELECT * FROM vw_AllTasks";
+                    else
+                        query = "SELECT * FROM vw_AllTasks WHERE FarmerID = "+ LoginInfo.userid;
+
+                    MySqlDataAdapter adp = new MySqlDataAdapter(query, con);
+                    adp.Fill(dt);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                    return;
+                }
+            }
+            ShowReport(dt, "dstask", "TaskReport.rdlc");
+        }
+
+        private void GenerateFarmSummaryReport()
+        {
+            DataTable dt = new DataTable();
+            using (MySqlConnection con = DataBaseHelper.getconnection())
+            {
+                try
+                {
+                    // uses stored procedure SP3
+                    MySqlCommand cmd = new MySqlCommand("GetFarmSummary", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@farmerID", LoginInfo.userid);
+
+                    MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
+                    adp.Fill(dt);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                    return;
+                }
+            }
+            ShowReport(dt, "dsFarmSummary", "FarmSummaryReport.rdlc");
+        }
+
+        private void GenerateFertilizerReport()
+        {
+            DataTable dt = new DataTable();
+            using (MySqlConnection con = DataBaseHelper.getconnection())
+            {
+                try
+                {
+                    MySqlDataAdapter adp = new MySqlDataAdapter(
+                        "SELECT * FROM vw_FertilizerAvailable", con);
+                    adp.Fill(dt);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                    return;
+                }
+            }
+            ShowReport(dt, "dsFertilizer", "FertilizerReport.rdlc");
+        }
+
+        private void GenerateBuyerReport()
+        {
+            DataTable dt = new DataTable();
+            using (MySqlConnection con = DataBaseHelper.getconnection())
+            {
+                try
+                {
+                    MySqlDataAdapter adp = new MySqlDataAdapter(
+                        @"SELECT 
+                  b.Name AS Name,
+                  b.Phone,
+                  COUNT(s.SaleID) AS TotalSales,
+                  COALESCE(SUM(s.Quantity * s.Price), 0) AS TotalAmount
+                  FROM buyer b
+                  LEFT JOIN sale s ON b.BuyerID = s.BuyerID
+                  GROUP BY b.BuyerID, b.Name, b.Phone
+                  ORDER BY TotalAmount DESC", con);
+                    adp.Fill(dt);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                    return;
+                }
+            }
+            ShowReport(dt, "dsBuyer", "BuyerReport.rdlc");
+        }
+
+
+        private void GeneratePaymentReport()
+        {
+            DataTable dt = new DataTable();
+            using (MySqlConnection con = DataBaseHelper.getconnection())
+            {
+                try
+                {
+                    MySqlDataAdapter adp = new MySqlDataAdapter(
+                        "SELECT * FROM vw_PaymentDetails ORDER BY PaymentDate DESC", con);
+                    adp.Fill(dt);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                    return;
+                }
+            }
+            ShowReport(dt, "dsPayment", "PaymentReport.rdlc");
+        }
+
+        private void GenerateWorkerReport()
+        {
+            DataTable dt = new DataTable();
+            using (MySqlConnection con = DataBaseHelper.getconnection())
+            {
+                try
+                { 
+                    string query;
+                    if (LoginInfo.role.ToLower() == "admin")
+                        query = "SELECT * FROM vw_getfarmerworkers";
+                    else
+                        query = "SELECT * FROM vw_getfarmerworkers WHERE FarmerID = "
+                                + LoginInfo.userid;
+
+                    MySqlDataAdapter adp = new MySqlDataAdapter(query, con);
+                    adp.Fill(dt);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                    return;
+                }
+            }
+            ShowReport(dt, "dsWorker", "WorkerReport.rdlc");
+        }
+
+        private void GenerateFertilizerApplicationReport()
+        {
+            DataTable dt = new DataTable();
+            using (MySqlConnection con = DataBaseHelper.getconnection())
+            {
+                try
+                {
+                    string query;
+                    if (LoginInfo.role.ToLower() == "admin")
+                        query = @"SELECT 
+                          fa.ApplicationID,
+                          field.Name AS FieldName,
+                          farm.Name AS FarmName,
+                          fert.Name AS FertilizerName,
+                          w.WorkerName,
+                          fa.QuantityUsed,
+                          fa.ApplicationDate
+                          FROM fertilizerapplication fa
+                          JOIN field ON fa.FieldID = field.FieldID
+                          JOIN farm ON field.FarmID = farm.FarmID
+                          JOIN fertilizer fert ON fa.FertilizerID = fert.FertilizerID
+                          JOIN worker w ON fa.WorkerID = w.WorkerID
+                          ORDER BY fa.ApplicationDate DESC";
+                    else
+                        query = @"SELECT 
+                          fa.ApplicationID,
+                          field.Name AS FieldName,
+                          farm.Name AS FarmName,
+                          fert.Name AS FertilizerName,
+                          w.WorkerName,
+                          fa.QuantityUsed,
+                          fa.ApplicationDate
+                          FROM fertilizerapplication fa
+                          JOIN field ON fa.FieldID = field.FieldID
+                          JOIN farm ON field.FarmID = farm.FarmID
+                          JOIN fertilizer fert ON fa.FertilizerID = fert.FertilizerID
+                          JOIN worker w ON fa.WorkerID = w.WorkerID
+                          WHERE farm.FarmerID = " + LoginInfo.userid + @"
+                          ORDER BY fa.ApplicationDate DESC";
+
+                    MySqlDataAdapter adp = new MySqlDataAdapter(query, con);
+                    adp.Fill(dt);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                    return;
+                }
+            }
+            ShowReport(dt, "dsFertilizerApp", "FertilizerApplicationReport.rdlc");
+        }
     }
 }

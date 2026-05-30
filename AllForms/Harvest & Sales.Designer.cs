@@ -42,6 +42,7 @@
             this.btnclear = new System.Windows.Forms.Button();
             this.btnsave = new System.Windows.Forms.Button();
             this.Sales = new System.Windows.Forms.TabPage();
+            this.lbltotal = new System.Windows.Forms.Label();
             this.dgvsales = new System.Windows.Forms.DataGridView();
             this.buttdelete = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -54,12 +55,9 @@
             this.cmbharvest = new System.Windows.Forms.ComboBox();
             this.dtpsaledate = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
-            this.cmbsplantation = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.buttclear = new System.Windows.Forms.Button();
             this.buttsave = new System.Windows.Forms.Button();
-            this.lbltotal = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvharvest)).BeginInit();
@@ -217,7 +215,7 @@
             this.btnsave.Name = "btnsave";
             this.btnsave.Size = new System.Drawing.Size(182, 75);
             this.btnsave.TabIndex = 19;
-            this.btnsave.Text = "Save / Update";
+            this.btnsave.Text = "Save";
             this.btnsave.UseVisualStyleBackColor = false;
             this.btnsave.Click += new System.EventHandler(this.btnsave_Click);
             // 
@@ -238,6 +236,16 @@
             this.Sales.Text = "Sales";
             this.Sales.UseVisualStyleBackColor = true;
             this.Sales.Click += new System.EventHandler(this.Sales_Click);
+            // 
+            // lbltotal
+            // 
+            this.lbltotal.AutoSize = true;
+            this.lbltotal.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbltotal.Location = new System.Drawing.Point(237, 609);
+            this.lbltotal.Name = "lbltotal";
+            this.lbltotal.Size = new System.Drawing.Size(153, 30);
+            this.lbltotal.TabIndex = 15;
+            this.lbltotal.Text = "Total Amount";
             // 
             // dgvsales
             // 
@@ -276,9 +284,7 @@
             this.groupBox2.Controls.Add(this.cmbharvest);
             this.groupBox2.Controls.Add(this.dtpsaledate);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.cmbsplantation);
             this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.ForeColor = System.Drawing.Color.MediumSeaGreen;
             this.groupBox2.Location = new System.Drawing.Point(242, 79);
@@ -290,7 +296,7 @@
             // 
             // txtprice
             // 
-            this.txtprice.Location = new System.Drawing.Point(465, 306);
+            this.txtprice.Location = new System.Drawing.Point(465, 260);
             this.txtprice.Name = "txtprice";
             this.txtprice.Size = new System.Drawing.Size(190, 34);
             this.txtprice.TabIndex = 14;
@@ -299,7 +305,7 @@
             // txtquantity
             // 
             this.txtquantity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtquantity.Location = new System.Drawing.Point(465, 207);
+            this.txtquantity.Location = new System.Drawing.Point(465, 127);
             this.txtquantity.Name = "txtquantity";
             this.txtquantity.Size = new System.Drawing.Size(190, 34);
             this.txtquantity.TabIndex = 13;
@@ -309,7 +315,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(460, 161);
+            this.label9.Location = new System.Drawing.Point(460, 82);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(85, 25);
             this.label9.TabIndex = 12;
@@ -319,17 +325,17 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(460, 266);
+            this.label8.Location = new System.Drawing.Point(460, 219);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(53, 25);
+            this.label8.Size = new System.Drawing.Size(126, 25);
             this.label8.TabIndex = 11;
-            this.label8.Text = "Price";
+            this.label8.Text = "Price Per Unit";
             // 
             // cmbbuyer
             // 
             this.cmbbuyer.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbbuyer.FormattingEnabled = true;
-            this.cmbbuyer.Location = new System.Drawing.Point(36, 312);
+            this.cmbbuyer.Location = new System.Drawing.Point(36, 266);
             this.cmbbuyer.Name = "cmbbuyer";
             this.cmbbuyer.Size = new System.Drawing.Size(195, 29);
             this.cmbbuyer.TabIndex = 10;
@@ -338,7 +344,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(31, 266);
+            this.label7.Location = new System.Drawing.Point(31, 219);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(60, 25);
             this.label7.TabIndex = 9;
@@ -348,7 +354,7 @@
             // 
             this.cmbharvest.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbharvest.FormattingEnabled = true;
-            this.cmbharvest.Location = new System.Drawing.Point(36, 207);
+            this.cmbharvest.Location = new System.Drawing.Point(36, 132);
             this.cmbharvest.Name = "cmbharvest";
             this.cmbharvest.Size = new System.Drawing.Size(195, 29);
             this.cmbharvest.TabIndex = 8;
@@ -356,7 +362,7 @@
             // dtpsaledate
             // 
             this.dtpsaledate.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpsaledate.Location = new System.Drawing.Point(279, 415);
+            this.dtpsaledate.Location = new System.Drawing.Point(288, 387);
             this.dtpsaledate.Name = "dtpsaledate";
             this.dtpsaledate.Size = new System.Drawing.Size(200, 29);
             this.dtpsaledate.TabIndex = 7;
@@ -365,40 +371,21 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(274, 356);
+            this.label4.Location = new System.Drawing.Point(283, 339);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(90, 25);
             this.label4.TabIndex = 6;
             this.label4.Text = "Sale Date";
             // 
-            // cmbsplantation
-            // 
-            this.cmbsplantation.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbsplantation.FormattingEnabled = true;
-            this.cmbsplantation.Location = new System.Drawing.Point(36, 95);
-            this.cmbsplantation.Name = "cmbsplantation";
-            this.cmbsplantation.Size = new System.Drawing.Size(195, 29);
-            this.cmbsplantation.TabIndex = 5;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(31, 161);
+            this.label5.Location = new System.Drawing.Point(31, 82);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(81, 25);
             this.label5.TabIndex = 4;
             this.label5.Text = " Harvest";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(31, 51);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(98, 25);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Plantation";
             // 
             // buttclear
             // 
@@ -424,16 +411,6 @@
             this.buttsave.Text = "Save / Update";
             this.buttsave.UseVisualStyleBackColor = false;
             this.buttsave.Click += new System.EventHandler(this.buttsave_Click_1);
-            // 
-            // lbltotal
-            // 
-            this.lbltotal.AutoSize = true;
-            this.lbltotal.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbltotal.Location = new System.Drawing.Point(237, 609);
-            this.lbltotal.Name = "lbltotal";
-            this.lbltotal.Size = new System.Drawing.Size(153, 30);
-            this.lbltotal.TabIndex = 15;
-            this.lbltotal.Text = "Total Amount";
             // 
             // Harvest___Sales
             // 
@@ -483,9 +460,7 @@
         private System.Windows.Forms.ComboBox cmbharvest;
         private System.Windows.Forms.DateTimePicker dtpsaledate;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox cmbsplantation;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button buttclear;
         private System.Windows.Forms.Button buttsave;
         private System.Windows.Forms.TextBox txtprice;

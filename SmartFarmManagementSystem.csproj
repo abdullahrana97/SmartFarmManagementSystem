@@ -267,8 +267,13 @@
     <EmbeddedResource Include="AllForms\WorkerTask.resx">
       <DependentUpon>WorkerTask.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="BuyerReport.rdlc" />
+    <EmbeddedResource Include="FarmSummaryReport.rdlc" />
+    <EmbeddedResource Include="FertilizerApplicationReport.rdlc" />
+    <EmbeddedResource Include="FertilizerReport.rdlc" />
     <EmbeddedResource Include="FieldReport.rdlc" />
     <EmbeddedResource Include="HarvestReport.rdlc" />
+    <EmbeddedResource Include="PaymentReport.rdlc" />
     <EmbeddedResource Include="PlantationReport.rdlc" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -280,6 +285,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <EmbeddedResource Include="SalesReport.rdlc" />
+    <EmbeddedResource Include="TaskReport.rdlc" />
     <None Include="DataSets\ReportDataSet.xsc">
       <DependentUpon>ReportDataSet.xsd</DependentUpon>
     </None>
