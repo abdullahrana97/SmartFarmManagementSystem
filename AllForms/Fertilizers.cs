@@ -57,7 +57,12 @@ namespace SmartFarmManagementSystem.AllForms
         {
             FertilizerBL bl = new FertilizerBL("", "");
             DataTable dt = bl.loadFertilizers();
-            if (dt != null) dgvfertilizers.DataSource = dt;
+            if (dt != null)
+            {
+                dgvfertilizers.DataSource = dt;
+                dgvfertilizers.Columns["FertilizerID"].Visible = false;
+
+            }
         }
 
         private void btnsave_Click(object sender, EventArgs e)
@@ -155,7 +160,12 @@ namespace SmartFarmManagementSystem.AllForms
         {
             FertilizerStockBL bl = new FertilizerStockBL(0, 0, DateTime.Now);
             DataTable dt = bl.loadStock();
-            if (dt != null) dgvfertilizerstock.DataSource = dt;
+            if (dt != null)
+            {
+                dgvfertilizerstock.DataSource = dt;
+                dgvfertilizerstock.Columns["StockID"].Visible = false;
+                dgvfertilizerstock.Columns["FertilizerID"].Visible = false;
+            }
         }
         private void dgvfertilizers_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -203,6 +213,7 @@ namespace SmartFarmManagementSystem.AllForms
             {
                 MessageBox.Show("Stock added!");
                 ClearStockFields();
+                LoadFertilizerNameDropdown();
                 LoadStock();
             }
         }
@@ -417,7 +428,15 @@ namespace SmartFarmManagementSystem.AllForms
         {
             FertilizerApplicationBL bl = new FertilizerApplicationBL(0, 0, 0, 0, DateTime.Now);
             DataTable dt = bl.loadApplications();
-            if (dt != null) dgvapplication.DataSource = dt;
+            if (dt != null)
+            {
+                dgvapplication.DataSource = dt;
+                dgvapplication.Columns["ApplicationID"].Visible = false;
+                dgvapplication.Columns["FieldID"].Visible = false;
+                dgvapplication.Columns["FertilizerID"].Visible = false;
+                dgvapplication.Columns["WorkerID"].Visible = false;
+               
+            }
         }
 
         private void LoadWorkerDropdown()

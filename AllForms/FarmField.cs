@@ -42,6 +42,7 @@ namespace SmartFarmManagementSystem.AllForms
 
                         adp.Fill(dt);
                         dgvfarm.DataSource = dt;
+                        dgvfarm.Columns["FarmID"].Visible = false; 
                     }
 
                     catch (Exception ex)
@@ -63,6 +64,7 @@ namespace SmartFarmManagementSystem.AllForms
 
                         adp.Fill(dt);
                         dgvfarm.DataSource = dt;
+                        dgvfarm.Columns["FarmID"].Visible = false;
                     }
 
                     catch (Exception ex)
@@ -97,6 +99,7 @@ namespace SmartFarmManagementSystem.AllForms
                 {
                     MessageBox.Show("Successfully Added Farm !");
                     ClearFields();
+                    loadcombofarms();
                     LoadFarms();
                    
                 }
@@ -186,6 +189,7 @@ namespace SmartFarmManagementSystem.AllForms
                     DataTable dt = new DataTable();
                     adp.Fill(dt);
                     dgvfields.DataSource = dt;
+                    dgvfields.Columns["FieldID"].Visible = false;
                 }
                 catch (Exception ex)
                 {
@@ -288,6 +292,11 @@ namespace SmartFarmManagementSystem.AllForms
             txtarea.Clear();
             cmbfarms.SelectedIndex = -1;
             cmbsoiltypes.SelectedIndex = -1;
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+            loadcombofarms();
         }
     }
 }

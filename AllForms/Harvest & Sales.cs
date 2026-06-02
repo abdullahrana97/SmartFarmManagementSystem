@@ -77,6 +77,8 @@ namespace SmartFarmManagementSystem.AllForms
             if (dt != null)
             {
                 dgvharvest.DataSource = dt;
+                dgvharvest.Columns["HarvestID"].Visible = false;
+                dgvharvest.Columns["PlantationID"].Visible = false;
             }
         }
 
@@ -239,7 +241,16 @@ namespace SmartFarmManagementSystem.AllForms
         {
             SaleBL bl = new SaleBL(0, 0, 0, 0, DateTime.Now);
             DataTable dt = bl.loadSales();
-            if (dt != null) dgvsales.DataSource = dt;
+            if (dt != null)
+            {
+                dgvsales.DataSource = dt;
+                dgvsales.Columns["SaleID"].Visible = false;
+                dgvsales.Columns["HarvestID"].Visible = false;
+                dgvsales.Columns["BuyerID"].Visible = false;
+                dgvsales.Columns["PlantationID"].Visible = false;
+                
+            }
+
         }
 
         

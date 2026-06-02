@@ -206,6 +206,8 @@ namespace SmartFarmManagementSystem.AllForms
 
             PlantationBL plantation = new PlantationBL(0, 0, DateTime.Now,"");
             dgvplantations.DataSource = plantation.loaddgvplantations();
+            dgvplantations.Columns["PlantationID"].Visible = false;
+            dgvplantations.Columns["FarmerID"].Visible = false;
         }
 
         private void dtpplantationdate_ValueChanged(object sender, EventArgs e)

@@ -65,7 +65,12 @@ namespace SmartFarmManagementSystem.AllForms
         {
             PaymentBL bl = new PaymentBL(0, 0, "", DateTime.Now);
             DataTable dt = bl.loadPayments();
-            if (dt != null) dgvpayments.DataSource = dt;
+            if (dt != null)
+            {
+                dgvpayments.DataSource = dt;
+                dgvpayments.Columns["PaymentID"].Visible = false;
+                dgvpayments.Columns["SaleID"].Visible = false;
+            }
         }
 
 
@@ -79,6 +84,10 @@ namespace SmartFarmManagementSystem.AllForms
                 selectedpaymentid = Convert.ToInt32(row.Cells["PaymentID"].Value);
                 DataBaseHelper.SetComboValue(cmbsales, "SaleID",
                     Convert.ToInt32(row.Cells["SaleID"].Value));
+
+                txtamount.Clear();
+                txtamount.Focus();
+
                 txtamount.Text = row.Cells["Amount"].Value.ToString();
                 cmbmethods.Text = row.Cells["Method"].Value.ToString();
                 dtppaymentdate.Value = Convert.ToDateTime(row.Cells["PaymentDate"].Value);
@@ -143,10 +152,12 @@ namespace SmartFarmManagementSystem.AllForms
                 return;
             }
 
+
             decimal newPayment = Convert.ToDecimal(txtamount.Text);
             decimal totalAmount = Convert.ToDecimal(dgvpayments.CurrentRow.Cells["TotalAmount"].Value);
             decimal alreadyPaid = Convert.ToDecimal(dgvpayments.CurrentRow.Cells["Amount"].Value);
             decimal remaining = totalAmount - alreadyPaid;
+
 
             if (newPayment <= 0)
             {

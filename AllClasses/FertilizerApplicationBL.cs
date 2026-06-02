@@ -88,7 +88,7 @@ namespace SmartFarmManagementSystem.AllClasses
                             field.Name AS FieldName,
                             f.FertilizerID,
                             f.Name AS Fertilizer,
-                            fa.WorkerID,
+                            w.WorkerID,
                             w.WorkerName AS Worker,
                             fa.QuantityUsed,
                             fa.ApplicationDate

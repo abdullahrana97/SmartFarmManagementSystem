@@ -75,7 +75,7 @@ namespace SmartFarmManagementSystem.AllClasses
 
         public DataTable loadStock()
         {
-            string query = @"SELECT fs.StockID, f.FertilizerID,f.Name AS Fertilizer,
+            string query = @"SELECT fs.StockID, f.FertilizerID,f.Name AS Fertilizer,f.type,
                             fs.QuantityAdded, fs.StockDate
                             FROM fertilizerstock fs
                             JOIN fertilizer f ON fs.FertilizerID = f.FertilizerID

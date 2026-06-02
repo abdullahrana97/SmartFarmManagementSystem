@@ -32,6 +32,7 @@ namespace SmartFarmManagementSystem.AllForms
             if (dt != null)
             {
                 dgvbuyers.DataSource = dt;
+                dgvbuyers.Columns["BuyerID"].Visible = false;
 
             }
         }

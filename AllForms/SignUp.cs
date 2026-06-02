@@ -37,7 +37,7 @@ namespace SmartFarmManagementSystem.AllForms
                 isValid = false;
             }
 
-            if (!rbadmin.Checked && !rbuser.Checked)
+            if (!rbuser.Checked)
             {
                 errorProvider.SetError(lblrole, "Select a Role");
                 isValid = false;
@@ -54,7 +54,7 @@ namespace SmartFarmManagementSystem.AllForms
             if (checkinputs())
             {
 
-                string role = rbadmin.Checked ? "Admin" : "Farmer";
+                string role =  "Farmer";
 
                 using (MySqlConnection conn = DataBaseHelper.getconnection())
                 {

@@ -40,7 +40,6 @@
             this.btnexit = new System.Windows.Forms.Button();
             this.btnsignup = new System.Windows.Forms.Button();
             this.rbuser = new System.Windows.Forms.RadioButton();
-            this.rbadmin = new System.Windows.Forms.RadioButton();
             this.lblrole = new System.Windows.Forms.Label();
             this.txtpassword = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -120,7 +119,6 @@
             this.panel2.Controls.Add(this.btnexit);
             this.panel2.Controls.Add(this.btnsignup);
             this.panel2.Controls.Add(this.rbuser);
-            this.panel2.Controls.Add(this.rbadmin);
             this.panel2.Controls.Add(this.lblrole);
             this.panel2.Controls.Add(this.txtpassword);
             this.panel2.Controls.Add(this.label5);
@@ -170,26 +168,15 @@
             // rbuser
             // 
             this.rbuser.AutoSize = true;
+            this.rbuser.Checked = true;
             this.rbuser.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbuser.Location = new System.Drawing.Point(263, 416);
+            this.rbuser.Location = new System.Drawing.Point(78, 410);
             this.rbuser.Name = "rbuser";
             this.rbuser.Size = new System.Drawing.Size(99, 32);
             this.rbuser.TabIndex = 6;
+            this.rbuser.TabStop = true;
             this.rbuser.Text = "Farmer";
             this.rbuser.UseVisualStyleBackColor = true;
-            // 
-            // rbadmin
-            // 
-            this.rbadmin.AutoSize = true;
-            this.rbadmin.Checked = true;
-            this.rbadmin.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbadmin.Location = new System.Drawing.Point(75, 416);
-            this.rbadmin.Name = "rbadmin";
-            this.rbadmin.Size = new System.Drawing.Size(97, 32);
-            this.rbadmin.TabIndex = 5;
-            this.rbadmin.TabStop = true;
-            this.rbadmin.Text = "Admin";
-            this.rbadmin.UseVisualStyleBackColor = true;
             // 
             // lblrole
             // 
@@ -288,7 +275,6 @@
         private System.Windows.Forms.Button btnexit;
         private System.Windows.Forms.Button btnsignup;
         private System.Windows.Forms.RadioButton rbuser;
-        private System.Windows.Forms.RadioButton rbadmin;
         private System.Windows.Forms.Label lblrole;
         private System.Windows.Forms.TextBox txtpassword;
         private System.Windows.Forms.Label label5;

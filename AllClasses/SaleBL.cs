@@ -60,7 +60,7 @@ namespace SmartFarmManagementSystem.AllClasses
                         @"INSERT INTO payment (SaleID, Amount, PaymentDate, Method)
                 VALUES (@s, @a, @d, 'Pending')", con, transaction);
                     cmd2.Parameters.AddWithValue("@s", saleid);
-                    cmd2.Parameters.AddWithValue("@a", quantity * price);
+                    cmd2.Parameters.AddWithValue("@a", 0);
                     cmd2.Parameters.AddWithValue("@d", saledate);
                     cmd2.ExecuteNonQuery();
 

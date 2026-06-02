@@ -58,6 +58,8 @@ namespace SmartFarmManagementSystem.AllForms
                     DataTable dt = new DataTable();
                     adapter.Fill(dt);
                     dgvworkers.DataSource = dt;
+                    dgvworkers.Columns["WorkerID"].Visible = false;
+                    dgvworkers.Columns["FarmerID"].Visible = false;
                 }
                 catch (Exception ex)
                 {
@@ -87,6 +89,7 @@ namespace SmartFarmManagementSystem.AllForms
                 {
                     MessageBox.Show("Worker added successfully");
                     loadworkers();
+                    LoadWorkerDropdown();
                     txtname.Clear();
                     txtphone.Clear();
                     cmbrole.SelectedIndex = -1;
@@ -417,7 +420,14 @@ namespace SmartFarmManagementSystem.AllForms
             TaskBL task = new TaskBL(0, 0, 0, "", DateTime.Now, null);
             DataTable dt = task.loadTasks();
             if (dt != null)
+            {
                 dgvtasks.DataSource = dt;
+                dgvtasks.Columns["TaskID"].Visible = false;
+                dgvtasks.Columns["FieldID"].Visible = false;
+                dgvtasks.Columns["WorkerID"].Visible = false;
+                dgvtasks.Columns["TaskTypeID"].Visible = false;
+                dgvtasks.Columns["FarmerID"].Visible = false;
+            }
         }
 
         private void buttdelete_Click(object sender, EventArgs e)
