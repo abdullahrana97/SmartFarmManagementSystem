@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.btndelete = new System.Windows.Forms.Button();
@@ -59,6 +60,9 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.lblfarmer = new System.Windows.Forms.Label();
+            this.cmbfarmer = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvworkers)).BeginInit();
@@ -66,6 +70,7 @@
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvtasks)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -150,6 +155,8 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.LightGray;
+            this.groupBox1.Controls.Add(this.cmbfarmer);
+            this.groupBox1.Controls.Add(this.lblfarmer);
             this.groupBox1.Controls.Add(this.cmbrole);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.txtphone);
@@ -435,6 +442,29 @@
             this.label6.TabIndex = 0;
             this.label6.Text = "Field Name";
             // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            // 
+            // lblfarmer
+            // 
+            this.lblfarmer.AutoSize = true;
+            this.lblfarmer.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblfarmer.Location = new System.Drawing.Point(453, 43);
+            this.lblfarmer.Name = "lblfarmer";
+            this.lblfarmer.Size = new System.Drawing.Size(174, 25);
+            this.lblfarmer.TabIndex = 6;
+            this.lblfarmer.Text = "Assigned To Farmer";
+            // 
+            // cmbfarmer
+            // 
+            this.cmbfarmer.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbfarmer.FormattingEnabled = true;
+            this.cmbfarmer.Location = new System.Drawing.Point(458, 84);
+            this.cmbfarmer.Name = "cmbfarmer";
+            this.cmbfarmer.Size = new System.Drawing.Size(195, 29);
+            this.cmbfarmer.TabIndex = 7;
+            // 
             // WorkerTask
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -455,6 +485,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvtasks)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -492,5 +523,8 @@
         private System.Windows.Forms.DataGridView dgvtasks;
         private System.Windows.Forms.ComboBox cmbstatus;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.ComboBox cmbfarmer;
+        private System.Windows.Forms.Label lblfarmer;
     }
 }

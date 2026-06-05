@@ -12,37 +12,43 @@ using System.Windows.Forms;
 
 namespace SmartFarmManagementSystem.AllForms
 {
-    public partial class Fertilizers : Form
+    public partial class FertilizerManagement : Form
     {
+        public FertilizerManagement()
+        {
+            InitializeComponent();
+           
+        }
+
         int selectedfertilizerID = -1;
         int selectedstockID = -1;
         int selectedapplicationID = -1;
         int selectedfieldID = -1;
         int selectedworkerID = -1;
 
-        public Fertilizers()
+
+        private void ApplyRolePermissions()
         {
-            InitializeComponent();
+            
+            if (LoginInfo.role.ToLower() != "admin")
+            {
+                btndelete.Visible = false;  
+                butdelete.Visible = false;  
+
+                if (Fertilizer.TabPages.Contains(tabPage1))
+                {
+                    Fertilizer.TabPages.Remove(tabPage1);
+                }
+            }
+            else
+            {
+        
+                btndelete.Visible = true;
+                butdelete.Visible = true;
+            }
         }
 
 
-        private void Fertilizers_Load(object sender, EventArgs e)
-        {
-            // Tab 1
-            LoadTypeItems();
-            LoadFertilizers();
-
-            // Tab 2
-            LoadFertilizerDropdown();
-            LoadStock();
-
-            // Tab 3
-            LoadFieldDropdown();
-            LoadFertilizerNameDropdown();
-            LoadWorkerDropdown();
-            LoadApplications();
-
-        }
 
 
         private void LoadTypeItems()
@@ -63,6 +69,25 @@ namespace SmartFarmManagementSystem.AllForms
                 dgvfertilizers.Columns["FertilizerID"].Visible = false;
 
             }
+        }
+
+        private void FertilizerManagement_Load(object sender, EventArgs e)
+        {
+            // Tab 1
+            LoadTypeItems();
+            LoadFertilizers();
+
+            // Tab 2
+            LoadFertilizerDropdown();
+            LoadStock();
+
+            // Tab 3
+            LoadFieldDropdown();
+            LoadFertilizerNameDropdown();
+            LoadWorkerDropdown();
+            LoadApplications();
+
+            ApplyRolePermissions(); 
         }
 
         private void btnsave_Click(object sender, EventArgs e)
@@ -120,19 +145,18 @@ namespace SmartFarmManagementSystem.AllForms
             }
         }
 
-
         private void ClearFertilizerFields()
         {
             selectedfertilizerID = -1;
             txtfname.Clear();
             cmbtype.SelectedIndex = -1;
+            txtfname.Focus();
         }
 
         private void btnclear_Click(object sender, EventArgs e)
         {
             ClearFertilizerFields();
         }
-
 
         private void LoadFertilizerDropdown()
         {
@@ -167,6 +191,7 @@ namespace SmartFarmManagementSystem.AllForms
                 dgvfertilizerstock.Columns["FertilizerID"].Visible = false;
             }
         }
+
         private void dgvfertilizers_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -184,15 +209,12 @@ namespace SmartFarmManagementSystem.AllForms
 
 
 
-
-        // ==================== TAB 2 — STOCK ====================
-
-
+        // ================ Tab 2 ===================
 
         private void butsave_Click(object sender, EventArgs e)
         {
             if (cmbfertilizer.SelectedValue == null ||
-                string.IsNullOrEmpty(txtquantityadded.Text))
+              string.IsNullOrEmpty(txtquantityadded.Text))
             {
                 MessageBox.Show("Please fill all fields.");
                 return;
@@ -217,6 +239,8 @@ namespace SmartFarmManagementSystem.AllForms
                 LoadStock();
             }
         }
+        
+        
 
         private void ClearStockFields()
         {
@@ -224,11 +248,6 @@ namespace SmartFarmManagementSystem.AllForms
             cmbfertilizer.SelectedIndex = -1;
             txtquantityadded.Clear();
             dtpstockdate.Value = DateTime.Now;
-        }
-
-        private void butclear_Click(object sender, EventArgs e)
-        {
-            ClearStockFields();
         }
 
         private void butdelete_Click(object sender, EventArgs e)
@@ -252,6 +271,11 @@ namespace SmartFarmManagementSystem.AllForms
             }
         }
 
+        private void butclear_Click(object sender, EventArgs e)
+        {
+            ClearStockFields();
+        }
+
         private void dgvfertilizerstock_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -264,6 +288,7 @@ namespace SmartFarmManagementSystem.AllForms
                 dtpstockdate.Value = Convert.ToDateTime(row.Cells["StockDate"].Value);
             }
         }
+
 
 
         // ==================== TAB 3 — APPLICATION ====================
@@ -334,14 +359,13 @@ namespace SmartFarmManagementSystem.AllForms
 
             if (e.RowIndex >= 0)
             {
-                
+
 
                 DataGridViewRow row = dgvapplication.Rows[e.RowIndex];
                 selectedapplicationID =
               Convert.ToInt32(row.Cells["ApplicationID"].Value);
 
-                cmbfieldname.SelectedValue =
-                    Convert.ToInt32(row.Cells["FieldID"].Value);
+                cmbfieldname.SelectedValue = row.Cells["FieldID"].Value;
 
                 cmbfertilizername.SelectedValue =
                     Convert.ToInt32(row.Cells["FertilizerID"].Value);
@@ -390,6 +414,48 @@ namespace SmartFarmManagementSystem.AllForms
             dtpapplicationstart.Value = DateTime.Now;
         }
 
+        private void LoadApplications()
+        {
+            FertilizerApplicationBL bl = new FertilizerApplicationBL(0, 0, 0, 0, DateTime.Now);
+            DataTable dt = bl.loadApplications();
+            if (dt != null)
+            {
+                dgvapplication.DataSource = dt;
+                dgvapplication.Columns["ApplicationID"].Visible = false;
+                dgvapplication.Columns["FieldID"].Visible = false;
+                dgvapplication.Columns["FertilizerID"].Visible = false;
+                dgvapplication.Columns["WorkerID"].Visible = false;
+
+            }
+        }
+
+        private void LoadWorkerDropdown()
+        {
+            string query;
+            if (LoginInfo.role.ToLower() == "admin")
+                query = "SELECT WorkerID, WorkerName FROM worker WHERE workerrole in ('Irrigator','General Worker')";
+            else
+                query = "SELECT WorkerID, WorkerName FROM worker WHERE workerrole in ('Irrigator','General Worker') AND FarmerID = " + LoginInfo.userid;
+
+            using (MySqlConnection con = DataBaseHelper.getconnection())
+            {
+                try
+                {
+                    MySqlDataAdapter adp = new MySqlDataAdapter(query, con);
+                    DataTable dt = new DataTable();
+                    adp.Fill(dt);
+                    cmbworker.DisplayMember = "WorkerName";
+                    cmbworker.ValueMember = "WorkerID";
+                    cmbworker.DataSource = dt;
+                    cmbworker.SelectedIndex = -1;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+        }
+
         private void buttsave_Click(object sender, EventArgs e)
         {
             if (cmbfieldname.SelectedValue == null ||
@@ -424,49 +490,23 @@ namespace SmartFarmManagementSystem.AllForms
             }
         }
 
-        private void LoadApplications()
+        private void buttclear_Click(object sender, EventArgs e)
         {
-            FertilizerApplicationBL bl = new FertilizerApplicationBL(0, 0, 0, 0, DateTime.Now);
-            DataTable dt = bl.loadApplications();
-            if (dt != null)
+            ClearApplicationFields();
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+            if (LoginInfo.role.ToLower() != "admin")
             {
-                dgvapplication.DataSource = dt;
-                dgvapplication.Columns["ApplicationID"].Visible = false;
-                dgvapplication.Columns["FieldID"].Visible = false;
-                dgvapplication.Columns["FertilizerID"].Visible = false;
-                dgvapplication.Columns["WorkerID"].Visible = false;
-               
+                btndelete.Visible = false;
             }
         }
 
-        private void LoadWorkerDropdown()
+        private void tabPage1_Click(object sender, EventArgs e)
         {
-            string query;
-            if (LoginInfo.role.ToLower() == "admin")
-                query = "SELECT WorkerID, WorkerName FROM worker";
-            else
-                query = "SELECT WorkerID, WorkerName FROM worker WHERE FarmerID = " + LoginInfo.userid;
-
-            using (MySqlConnection con = DataBaseHelper.getconnection())
-            {
-                try
-                {
-                    MySqlDataAdapter adp = new MySqlDataAdapter(query, con);
-                    DataTable dt = new DataTable();
-                    adp.Fill(dt);
-                    cmbworker.DisplayMember = "WorkerName";
-                    cmbworker.ValueMember = "WorkerID";
-                    cmbworker.DataSource = dt;
-                    cmbworker.SelectedIndex = -1;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error: " + ex.Message);
-                }
-            }
+           
         }
-
-       
     }
+  }
 
-}

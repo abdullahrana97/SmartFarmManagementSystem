@@ -14,14 +14,14 @@ namespace SmartFarmManagementSystem.AllClasses
         private string farmname;
         private string location;
         private string status;
-        private int farmerid = LoginInfo.userid;
+        private int farmerid;
 
-        public FarmBL(string farmname, string location,string status)
+        public FarmBL(string farmname, string location,string status,int farmerid)
         {
             this.farmname = farmname;
             this.location = location;
             this.status = status;
-            
+            this.farmerid = farmerid;
         }
 
 
@@ -108,6 +108,8 @@ namespace SmartFarmManagementSystem.AllClasses
             }
 
         }
+
+
 
 
     }

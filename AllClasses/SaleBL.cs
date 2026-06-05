@@ -98,7 +98,13 @@ namespace SmartFarmManagementSystem.AllClasses
 
         public DataTable loadSales()
         {
-            string query = "SELECT * FROM vw_SalesDetails ORDER BY SaleDate DESC";
+            string query;
+            if (LoginInfo.role.ToLower() == "admin")
+                query = "SELECT * FROM vw_SalesDetails ORDER BY SaleDate DESC";
+            else
+                query = "SELECT * FROM vw_SalesDetails WHERE FarmerID = "
+                        + LoginInfo.userid + " ORDER BY SaleDate DESC";
+
             using (MySqlConnection con = DataBaseHelper.getconnection())
             {
                 try

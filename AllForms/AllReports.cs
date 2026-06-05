@@ -96,6 +96,7 @@ namespace SmartFarmManagementSystem.AllForms
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@fromDate",dtpfromdate.Value.Date);
                     cmd.Parameters.AddWithValue("@toDate", dtptodate.Value.Date);
+                    cmd.Parameters.AddWithValue("@farmerID",LoginInfo.role.ToLower() == "admin" ? 0 : LoginInfo.userid);
 
                     MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
                     adp.Fill(dt);
@@ -327,9 +328,15 @@ namespace SmartFarmManagementSystem.AllForms
             {
                 try
                 {
-                    MySqlDataAdapter adp = new MySqlDataAdapter(
-                        "SELECT * FROM vw_PaymentDetails ORDER BY PaymentDate DESC", con);
+                    string query;
+                    if (LoginInfo.role.ToLower() == "admin")
+                        query = "SELECT * FROM vw_paymentdetails";
+                    else
+                        query = "SELECT * FROM vw_paymentdetails WHERE FarmerID = "+ LoginInfo.userid;
+
+                    MySqlDataAdapter adp = new MySqlDataAdapter(query, con);
                     adp.Fill(dt);
+                    
                 }
                 catch (Exception ex)
                 {

@@ -81,6 +81,11 @@ namespace SmartFarmManagementSystem.AllForms
 
         private void Plantation_Load(object sender, EventArgs e)
         {
+            if (LoginInfo.role.ToLower() != "admin")
+            {
+                btndelete.Visible = false;
+            }
+
             LoadCropDropdown();
             LoadFieldDropdown();
             loadplantations();
@@ -94,6 +99,9 @@ namespace SmartFarmManagementSystem.AllForms
 
         private void btnsave_Click(object sender, EventArgs e)
         {
+            if (!ValidatePlantation())
+                return;
+
 
             int cropid = Convert.ToInt32(cmbcrops.SelectedValue);
             int fieldid = Convert.ToInt32(cmbfields.SelectedValue);
@@ -168,6 +176,34 @@ namespace SmartFarmManagementSystem.AllForms
 
         }
 
+        private bool ValidatePlantation()
+        {
+            errorProvider.Clear();
+            bool isValid = true;
+
+            if (cmbfields.SelectedValue == null)
+            {
+                errorProvider.SetError(cmbfields, "Please select a field.");
+                isValid = false;
+            }
+
+            if (cmbcrops.SelectedValue == null)
+            {
+                errorProvider.SetError(cmbcrops, "Please select a crop.");
+                isValid = false;
+            }
+
+            if (dtpplantationdate.Value > DateTime.Now)
+            {
+                errorProvider.SetError(dtpplantationdate, "Planting date cannot be in future.");
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+
+
         private void btndelete_Click(object sender, EventArgs e)
         {
             if (selectedplantationid != -1)
@@ -234,6 +270,19 @@ namespace SmartFarmManagementSystem.AllForms
             ClearFields();
         }
 
+        private void cmbfields_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            errorProvider.SetError(cmbfields, "");
+        }
 
+        private void cmbcrops_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            errorProvider.SetError(cmbcrops, "");
+        }
+
+        private void cmbstatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            errorProvider.SetError(cmbstatus, "");
+        }
     }
 }

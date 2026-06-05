@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dgvharvest = new System.Windows.Forms.DataGridView();
@@ -42,6 +43,7 @@
             this.btnclear = new System.Windows.Forms.Button();
             this.btnsave = new System.Windows.Forms.Button();
             this.Sales = new System.Windows.Forms.TabPage();
+            this.lblavailablequantity = new System.Windows.Forms.Label();
             this.lbltotal = new System.Windows.Forms.Label();
             this.dgvsales = new System.Windows.Forms.DataGridView();
             this.buttdelete = new System.Windows.Forms.Button();
@@ -58,6 +60,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.buttclear = new System.Windows.Forms.Button();
             this.buttsave = new System.Windows.Forms.Button();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvharvest)).BeginInit();
@@ -65,6 +68,7 @@
             this.Sales.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvsales)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -164,6 +168,7 @@
             this.cmbplantation.Name = "cmbplantation";
             this.cmbplantation.Size = new System.Drawing.Size(195, 29);
             this.cmbplantation.TabIndex = 5;
+            this.cmbplantation.SelectedIndexChanged += new System.EventHandler(this.cmbplantation_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -183,6 +188,7 @@
             this.txtquantityharvested.Name = "txtquantityharvested";
             this.txtquantityharvested.Size = new System.Drawing.Size(195, 29);
             this.txtquantityharvested.TabIndex = 1;
+            this.txtquantityharvested.TextChanged += new System.EventHandler(this.txtquantityharvested_TextChanged);
             // 
             // label1
             // 
@@ -221,6 +227,7 @@
             // 
             // Sales
             // 
+            this.Sales.Controls.Add(this.lblavailablequantity);
             this.Sales.Controls.Add(this.lbltotal);
             this.Sales.Controls.Add(this.dgvsales);
             this.Sales.Controls.Add(this.buttdelete);
@@ -236,6 +243,16 @@
             this.Sales.Text = "Sales";
             this.Sales.UseVisualStyleBackColor = true;
             this.Sales.Click += new System.EventHandler(this.Sales_Click);
+            // 
+            // lblavailablequantity
+            // 
+            this.lblavailablequantity.AutoSize = true;
+            this.lblavailablequantity.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblavailablequantity.Location = new System.Drawing.Point(984, 206);
+            this.lblavailablequantity.Name = "lblavailablequantity";
+            this.lblavailablequantity.Size = new System.Drawing.Size(205, 30);
+            this.lblavailablequantity.TabIndex = 28;
+            this.lblavailablequantity.Text = "Available Quantity";
             // 
             // lbltotal
             // 
@@ -317,9 +334,9 @@
             this.label9.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.Location = new System.Drawing.Point(460, 82);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(85, 25);
+            this.label9.Size = new System.Drawing.Size(147, 25);
             this.label9.TabIndex = 12;
-            this.label9.Text = "Quantity";
+            this.label9.Text = "Quantity to Sale";
             // 
             // label8
             // 
@@ -339,6 +356,7 @@
             this.cmbbuyer.Name = "cmbbuyer";
             this.cmbbuyer.Size = new System.Drawing.Size(195, 29);
             this.cmbbuyer.TabIndex = 10;
+            this.cmbbuyer.SelectedIndexChanged += new System.EventHandler(this.cmbbuyer_SelectedIndexChanged);
             // 
             // label7
             // 
@@ -358,6 +376,7 @@
             this.cmbharvest.Name = "cmbharvest";
             this.cmbharvest.Size = new System.Drawing.Size(195, 29);
             this.cmbharvest.TabIndex = 8;
+            this.cmbharvest.SelectedIndexChanged += new System.EventHandler(this.cmbharvest_SelectedIndexChanged);
             // 
             // dtpsaledate
             // 
@@ -412,6 +431,10 @@
             this.buttsave.UseVisualStyleBackColor = false;
             this.buttsave.Click += new System.EventHandler(this.buttsave_Click_1);
             // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            // 
             // Harvest___Sales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -434,6 +457,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvsales)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -470,5 +494,7 @@
         private System.Windows.Forms.ComboBox cmbbuyer;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lbltotal;
+        private System.Windows.Forms.Label lblavailablequantity;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

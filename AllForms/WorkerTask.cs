@@ -24,6 +24,7 @@ namespace SmartFarmManagementSystem.AllForms
         int selectedfieldid = -1;
         int selectedworkerid_task = -1;
         int selectedtasktypeid = -1;
+        int farmerid = 0;
 
         private void dgvworkers_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -77,9 +78,30 @@ namespace SmartFarmManagementSystem.AllForms
         {
 
 
+            if (!ValidateWorker())
+            {
+                return;
+            }
+
+
+            if (LoginInfo.role.ToLower() == "admin")
+            {
+                if (cmbfarmer.SelectedValue == null)
+                {
+                    MessageBox.Show("Please select a farmer to assign this worker to.");
+                    return;
+                }
+                farmerid = Convert.ToInt32(cmbfarmer.SelectedValue);
+            }
+            else
+            {
+                farmerid = LoginInfo.userid;
+            }
+
+
             if (selectedworkerid == -1)
             {
-                WorkerBL worker = new WorkerBL(txtname.Text, txtphone.Text, cmbrole.SelectedItem.ToString());
+                WorkerBL worker = new WorkerBL(txtname.Text, txtphone.Text, cmbrole.SelectedItem.ToString(),farmerid);
                 if (!worker.checkinputs())
                 {
                     MessageBox.Show("Please fill all fields");
@@ -102,7 +124,7 @@ namespace SmartFarmManagementSystem.AllForms
 
             else
             {
-                WorkerBL worker = new WorkerBL(txtname.Text, txtphone.Text, cmbrole.SelectedItem.ToString());
+                WorkerBL worker = new WorkerBL(txtname.Text, txtphone.Text, cmbrole.SelectedItem.ToString(), farmerid);
                 if (!worker.checkinputs())
                 {
                     MessageBox.Show("Please fill all fields");
@@ -131,9 +153,48 @@ namespace SmartFarmManagementSystem.AllForms
             txtname.Clear();
             txtphone.Clear();
             cmbrole.SelectedIndex = -1;
+            cmbfarmer.SelectedIndex = -1;
             selectedworkerid = -1;
             txtname.Focus();
         }
+
+        private bool ValidateWorker()
+        {
+            errorProvider.Clear();
+            bool isValid = true;
+
+            if (Validator.IsEmpty(txtname.Text))
+            {
+                errorProvider.SetError(txtname, "Worker name is required.");
+                isValid = false;
+            }
+            else if (txtname.Text.Length < 3)
+            {
+                errorProvider.SetError(txtname, "Name must be at least 3 characters.");
+                isValid = false;
+            }
+
+            if (Validator.IsEmpty(txtphone.Text))
+            {
+                errorProvider.SetError(txtphone, "Phone number is required.");
+                isValid = false;
+            }
+            else if (!Validator.IsValidPhone(txtphone.Text))
+            {
+                errorProvider.SetError(txtphone, "Enter valid Pakistani number e.g. 03001234567");
+                isValid = false;
+            }
+
+            if (string.IsNullOrEmpty(cmbrole.Text))
+            {
+                errorProvider.SetError(cmbrole, "Please select a role.");
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+
 
         private void btndelete_Click(object sender, EventArgs e)
         {
@@ -142,7 +203,7 @@ namespace SmartFarmManagementSystem.AllForms
                 DialogResult result = MessageBox.Show("Are you sure you want to delete this worker?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (result == DialogResult.Yes)
                 {
-                    WorkerBL worker = new WorkerBL(txtname.Text, txtphone.Text, cmbrole.SelectedItem.ToString());
+                    WorkerBL worker = new WorkerBL(txtname.Text, txtphone.Text, cmbrole.SelectedItem.ToString(),farmerid);
                     if (worker.deleteworker(selectedworkerid))
                     {
                         MessageBox.Show("Worker deleted successfully");
@@ -179,6 +240,20 @@ namespace SmartFarmManagementSystem.AllForms
 
         private void WorkerTask_Load(object sender, EventArgs e)
         {
+            if(LoginInfo.role.ToLower() != "admin")
+            {
+                btndelete.Visible = false;
+                buttdelete.Visible = false;
+                lblfarmer.Visible = false;
+                cmbfarmer.Visible = false;
+            }
+
+            if(LoginInfo.role.ToLower() == "admin")
+            {
+                lblfarmer.Visible = true;
+                cmbfarmer.Visible = true;
+                LoadFarmerDropdown();
+            }
             dtpenddate.Enabled = false;
             LoadFieldDropdown();
             LoadTasks();
@@ -191,6 +266,28 @@ namespace SmartFarmManagementSystem.AllForms
 
         }
 
+
+        private void LoadFarmerDropdown()
+        {
+            using (MySqlConnection con = DataBaseHelper.getconnection())
+            {
+                try
+                {
+                    MySqlDataAdapter adp = new MySqlDataAdapter(
+                        "SELECT UserID, Username FROM user WHERE Role = 'Farmer'", con);
+                    DataTable dt = new DataTable();
+                    adp.Fill(dt);
+                    cmbfarmer.DisplayMember = "Username";
+                    cmbfarmer.ValueMember = "UserID";
+                    cmbfarmer.DataSource = dt;
+                    cmbfarmer.SelectedIndex = -1;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+        }
 
         private void LoadFieldDropdown()
         {
@@ -353,6 +450,23 @@ namespace SmartFarmManagementSystem.AllForms
 
         private void btnsaveupdate_Click(object sender, EventArgs e)
         {
+            int farmerid;
+
+            if (LoginInfo.role.ToLower() == "admin")
+            {
+                if (cmbfarmer.SelectedValue == null)
+                {
+                    MessageBox.Show("Please select a farmer to assign this farm to.");
+                    return;
+                }
+                farmerid = Convert.ToInt32(cmbfarmer.SelectedValue);
+            }
+            else
+            {
+                farmerid = LoginInfo.userid;
+            }
+
+
             int fieldid = Convert.ToInt32(cmbfield.SelectedValue);
             int workerid = Convert.ToInt32(cmbworker.SelectedValue);
             int tasktypeid = Convert.ToInt32(cmbtasktype.SelectedValue);
@@ -367,7 +481,7 @@ namespace SmartFarmManagementSystem.AllForms
                cmbworker.SelectedValue == null ||
                cmbtasktype.SelectedValue == null)
             {
-                MessageBox.Show("Please select field, worker and task type.");
+                MessageBox.Show("Please select field, worker, farmer and task type.");
                 return;
             }
 

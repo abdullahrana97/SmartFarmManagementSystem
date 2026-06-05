@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dgvbuyers = new System.Windows.Forms.DataGridView();
             this.buttdelete = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -37,8 +38,10 @@
             this.label6 = new System.Windows.Forms.Label();
             this.buttclear = new System.Windows.Forms.Button();
             this.buttsave = new System.Windows.Forms.Button();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvbuyers)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvbuyers
@@ -91,14 +94,17 @@
             this.txtphone.Name = "txtphone";
             this.txtphone.Size = new System.Drawing.Size(195, 31);
             this.txtphone.TabIndex = 14;
+            this.txtphone.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.txtphone_MaskInputRejected);
             // 
             // txtname
             // 
             this.txtname.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtname.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtname.Location = new System.Drawing.Point(36, 153);
             this.txtname.Name = "txtname";
-            this.txtname.Size = new System.Drawing.Size(190, 34);
+            this.txtname.Size = new System.Drawing.Size(190, 31);
             this.txtname.TabIndex = 13;
+            this.txtname.TextChanged += new System.EventHandler(this.txtname_TextChanged);
             // 
             // label5
             // 
@@ -145,6 +151,10 @@
             this.buttsave.UseVisualStyleBackColor = false;
             this.buttsave.Click += new System.EventHandler(this.buttsave_Click);
             // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            // 
             // Buyer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -162,6 +172,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvbuyers)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -177,5 +188,6 @@
         private System.Windows.Forms.Button buttclear;
         private System.Windows.Forms.Button buttsave;
         private System.Windows.Forms.MaskedTextBox txtphone;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

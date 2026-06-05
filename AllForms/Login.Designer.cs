@@ -47,11 +47,12 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtusername = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.errorprovider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.lblerror = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorprovider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -63,7 +64,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(417, 866);
+            this.panel1.Size = new System.Drawing.Size(417, 894);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -224,11 +225,13 @@
             this.txtpassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtpassword.ForeColor = System.Drawing.Color.ForestGreen;
             this.txtpassword.Location = new System.Drawing.Point(75, 266);
+            this.txtpassword.Margin = new System.Windows.Forms.Padding(3, 3, 3, 20);
             this.txtpassword.MaxLength = 10;
             this.txtpassword.Name = "txtpassword";
             this.txtpassword.Size = new System.Drawing.Size(485, 28);
             this.txtpassword.TabIndex = 3;
             this.txtpassword.UseSystemPasswordChar = true;
+            this.txtpassword.TextChanged += new System.EventHandler(this.txtpassword_TextChanged);
             // 
             // label5
             // 
@@ -249,9 +252,11 @@
             this.txtusername.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtusername.ForeColor = System.Drawing.Color.ForestGreen;
             this.txtusername.Location = new System.Drawing.Point(75, 150);
+            this.txtusername.Margin = new System.Windows.Forms.Padding(3, 3, 3, 20);
             this.txtusername.Name = "txtusername";
             this.txtusername.Size = new System.Drawing.Size(485, 28);
             this.txtusername.TabIndex = 1;
+            this.txtusername.TextChanged += new System.EventHandler(this.txtusername_TextChanged);
             // 
             // label4
             // 
@@ -263,16 +268,27 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "username";
             // 
-            // errorprovider
+            // errorProvider
             // 
-            this.errorprovider.ContainerControl = this;
+            this.errorProvider.ContainerControl = this;
+            // 
+            // lblerror
+            // 
+            this.lblerror.AutoSize = true;
+            this.lblerror.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblerror.ForeColor = System.Drawing.Color.Red;
+            this.lblerror.Location = new System.Drawing.Point(678, 865);
+            this.lblerror.Name = "lblerror";
+            this.lblerror.Size = new System.Drawing.Size(0, 25);
+            this.lblerror.TabIndex = 2;
             // 
             // Login
             // 
             this.AcceptButton = this.btnlogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1554, 866);
+            this.ClientSize = new System.Drawing.Size(1569, 894);
+            this.Controls.Add(this.lblerror);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -287,8 +303,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorprovider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -310,7 +327,8 @@
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Button btnexit;
         private System.Windows.Forms.Button btnlogin;
-        private System.Windows.Forms.ErrorProvider errorprovider;
+        private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblerror;
     }
 }

@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dgvpayments = new System.Windows.Forms.DataGridView();
-            this.btndelete = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtamount = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -42,8 +42,10 @@
             this.btnclear = new System.Windows.Forms.Button();
             this.btnsave = new System.Windows.Forms.Button();
             this.lblpaymentstatus = new System.Windows.Forms.Label();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvpayments)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvpayments
@@ -58,18 +60,6 @@
             this.dgvpayments.Size = new System.Drawing.Size(1225, 164);
             this.dgvpayments.TabIndex = 32;
             this.dgvpayments.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvpayments_CellClick);
-            // 
-            // btndelete
-            // 
-            this.btndelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.btndelete.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btndelete.Location = new System.Drawing.Point(516, 620);
-            this.btndelete.Name = "btndelete";
-            this.btndelete.Size = new System.Drawing.Size(142, 71);
-            this.btndelete.TabIndex = 31;
-            this.btndelete.Text = "Delete";
-            this.btndelete.UseVisualStyleBackColor = false;
-            this.btndelete.Click += new System.EventHandler(this.btndelete_Click);
             // 
             // groupBox2
             // 
@@ -98,6 +88,7 @@
             this.txtamount.Name = "txtamount";
             this.txtamount.Size = new System.Drawing.Size(190, 34);
             this.txtamount.TabIndex = 13;
+            this.txtamount.TextChanged += new System.EventHandler(this.txtamount_TextChanged);
             // 
             // label9
             // 
@@ -117,6 +108,7 @@
             this.cmbmethods.Name = "cmbmethods";
             this.cmbmethods.Size = new System.Drawing.Size(195, 29);
             this.cmbmethods.TabIndex = 10;
+            this.cmbmethods.SelectedIndexChanged += new System.EventHandler(this.cmbmethods_SelectedIndexChanged);
             // 
             // label7
             // 
@@ -154,6 +146,7 @@
             this.cmbsales.Name = "cmbsales";
             this.cmbsales.Size = new System.Drawing.Size(195, 29);
             this.cmbsales.TabIndex = 5;
+            this.cmbsales.SelectedIndexChanged += new System.EventHandler(this.cmbsales_SelectedIndexChanged);
             // 
             // label6
             // 
@@ -199,6 +192,10 @@
             this.lblpaymentstatus.TabIndex = 14;
             this.lblpaymentstatus.Text = "Payment Status";
             // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            // 
             // Payment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -206,7 +203,6 @@
             this.ClientSize = new System.Drawing.Size(1225, 905);
             this.Controls.Add(this.lblpaymentstatus);
             this.Controls.Add(this.dgvpayments);
-            this.Controls.Add(this.btndelete);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnclear);
             this.Controls.Add(this.btnsave);
@@ -216,6 +212,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvpayments)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -224,7 +221,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgvpayments;
-        private System.Windows.Forms.Button btndelete;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox txtamount;
         private System.Windows.Forms.Label label9;
@@ -237,5 +233,6 @@
         private System.Windows.Forms.Button btnclear;
         private System.Windows.Forms.Button btnsave;
         private System.Windows.Forms.Label lblpaymentstatus;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

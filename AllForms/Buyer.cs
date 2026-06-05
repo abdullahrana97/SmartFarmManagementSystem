@@ -22,6 +22,10 @@ namespace SmartFarmManagementSystem.AllForms
 
         private void Buyer_Load(object sender, EventArgs e)
         {
+            if (LoginInfo.role.ToLower() != "admin")
+            { 
+                buttdelete.Enabled = false;
+            }
             LoadBuyers();
         }
 
@@ -39,6 +43,12 @@ namespace SmartFarmManagementSystem.AllForms
 
         private void buttsave_Click(object sender, EventArgs e)
         {
+            if(!ValidateBuyer())
+            {
+                return;
+            }
+
+
             BuyerBL bl = new BuyerBL(txtname.Text, txtphone.Text);
 
             if (!bl.checkinputs())
@@ -88,7 +98,30 @@ namespace SmartFarmManagementSystem.AllForms
             }
         }
 
+        private bool ValidateBuyer()
+        {
+            errorProvider.Clear();
+            bool isValid = true;
 
+            if (Validator.IsEmpty(txtname.Text))
+            {
+                errorProvider.SetError(txtname, "Buyer name is required.");
+                isValid = false;
+            }
+
+            if (Validator.IsEmpty(txtphone.Text))
+            {
+                errorProvider.SetError(txtphone, "Phone is required.");
+                isValid = false;
+            }
+            else if (!Validator.IsValidPhone(txtphone.Text))
+            {
+                errorProvider.SetError(txtphone, "Enter valid number e.g. 03001234567");
+                isValid = false;
+            }
+
+            return isValid;
+        }
 
 
         private void ClearFields()
@@ -112,6 +145,16 @@ namespace SmartFarmManagementSystem.AllForms
         private void buttclear_Click(object sender, EventArgs e)
         {
             ClearFields();
+        }
+
+        private void txtname_TextChanged(object sender, EventArgs e)
+        {
+            errorProvider.SetError(txtname, "");
+        }
+
+        private void txtphone_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+            errorProvider.SetError(txtphone, "");
         }
     }
 }

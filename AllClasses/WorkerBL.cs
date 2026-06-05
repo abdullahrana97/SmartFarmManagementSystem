@@ -14,14 +14,14 @@ namespace SmartFarmManagementSystem.AllClasses
         private string workerphone;
         private string role;
 
-        private int farmerid = LoginInfo.userid;
+        private int farmerid;
 
-        public WorkerBL(string workername, string workerphone, string role)
+        public WorkerBL(string workername, string workerphone, string role, int farmerid)
         {
             this.workername = workername;
             this.workerphone = workerphone;
             this.role = role;
-
+            this.farmerid = farmerid;
         }
 
         public bool checkinputs()

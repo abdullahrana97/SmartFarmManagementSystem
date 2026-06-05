@@ -113,7 +113,7 @@ namespace SmartFarmManagementSystem.AllClasses
             if (LoginInfo.role.ToLower() == "admin")
                 query = @"SELECT h.HarvestID, h.PlantationID,
                           CONCAT(c.Name,' - ',f.Name) AS Plantation,
-                          h.Quantity, h.HarvestDate
+                          h.Quantity as QuantityHavested, h.HarvestDate
                           FROM harvest h
                           JOIN plantation p ON h.PlantationID = p.PlantationID
                           JOIN crop c ON p.CropID = c.CropID
@@ -123,7 +123,7 @@ namespace SmartFarmManagementSystem.AllClasses
             else
                 query = @"SELECT h.HarvestID, h.PlantationID,
                           CONCAT(c.Name,' - ',f.Name) AS Plantation,
-                          h.Quantity, h.HarvestDate
+                          h.Quantity as QuantityHarvested, h.HarvestDate
                           FROM harvest h
                           JOIN plantation p ON h.PlantationID = p.PlantationID
                           JOIN crop c ON p.CropID = c.CropID

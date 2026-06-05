@@ -14,6 +14,8 @@ namespace SmartFarmManagementSystem.AllForms
 {
     public partial class FarmField : Form
     {
+
+        int farmerid;
         public FarmField()
         {
             InitializeComponent();
@@ -21,9 +23,27 @@ namespace SmartFarmManagementSystem.AllForms
             loadcombofarms();
             loadcombosoiltypes();
             loadfields();
+            this.Load += FarmField_Load;
         }
 
-
+        private void FarmField_Load(object sender, EventArgs e)
+        {
+            if(LoginInfo.role.ToLower() == "farmer")
+            {
+                btndelete.Visible = false;
+                bttndelete.Visible = false;
+                lblfarmer.Visible = false;
+                cmbfarmer.Visible = false;
+               
+            }
+            if (LoginInfo.role.ToLower() == "admin")
+            {
+                lblfarmer.Visible = true;
+                cmbfarmer.Visible = true;
+                LoadFarmerDropdown();
+            }
+            LoadFarms();
+        }
 
         int selectedfarmid = -1;    
         int selectedfieldid = -1;
@@ -51,6 +71,8 @@ namespace SmartFarmManagementSystem.AllForms
                     }
                 }
             }
+
+
 
             else if (LoginInfo.role.ToLower() == "farmer")
             {
@@ -82,9 +104,52 @@ namespace SmartFarmManagementSystem.AllForms
 
         }
 
+        private void LoadFarmerDropdown()
+        {
+            using (MySqlConnection con = DataBaseHelper.getconnection())
+            {
+                try
+                {
+                    MySqlDataAdapter adp = new MySqlDataAdapter(
+                        "SELECT UserID, Username FROM user WHERE Role = 'Farmer'", con);
+                    DataTable dt = new DataTable();
+                    adp.Fill(dt);
+                    cmbfarmer.DisplayMember = "Username";
+                    cmbfarmer.ValueMember = "UserID";
+                    cmbfarmer.DataSource = dt;
+                    cmbfarmer.SelectedIndex = -1;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+        }
+
         private void btnsave_Click(object sender, EventArgs e)
         {
-            FarmBL farm = new FarmBL(txtfarmname.Text, txtlocation.Text, cmbstatus.Text);
+            if (!ValidateFarm()) return;
+
+
+            if (LoginInfo.role.ToLower() == "admin")
+            {
+                if (cmbfarmer.SelectedValue == null)
+                {
+                    MessageBox.Show("Please select a farmer to assign this farm to.");
+                    return;
+                }
+                farmerid = Convert.ToInt32(cmbfarmer.SelectedValue);
+            }
+            else
+            {
+                // farmer assigns to himself
+                farmerid = LoginInfo.userid;
+            }
+
+
+           
+
+            FarmBL farm = new FarmBL(txtfarmname.Text, txtlocation.Text, cmbstatus.Text,farmerid);
 
             if (!farm.checkinputs())
             {
@@ -101,6 +166,7 @@ namespace SmartFarmManagementSystem.AllForms
                     ClearFields();
                     loadcombofarms();
                     LoadFarms();
+                  
                    
                 }
             }
@@ -121,7 +187,7 @@ namespace SmartFarmManagementSystem.AllForms
 
         private void btndelete_Click(object sender, EventArgs e)
         {
-            FarmBL farm = new FarmBL(txtfarmname.Text, txtlocation.Text, cmbstatus.Text);
+            FarmBL farm = new FarmBL(txtfarmname.Text, txtlocation.Text, cmbstatus.Text, farmerid);
 
             if (selectedfarmid == -1)
             {
@@ -161,6 +227,45 @@ namespace SmartFarmManagementSystem.AllForms
                 cmbstatus.Text = row.Cells["Status"].Value.ToString();
             }
         }
+
+        private bool ValidateFarm()
+        {
+            errorProvider.Clear();
+            bool isValid = true;
+
+            if (Validator.IsEmpty(txtfarmname.Text))
+            {
+                errorProvider.SetError(txtfarmname, "Farm name is required.");
+                isValid = false;
+            }
+            else if (txtfarmname.Text.Length < 3)
+            {
+                errorProvider.SetError(txtfarmname, "Farm name must be at least 3 characters.");
+                isValid = false;
+            }
+
+            if (Validator.IsEmpty(txtlocation.Text))
+            {
+                errorProvider.SetError(txtlocation, "Location is required.");
+                isValid = false;
+            }
+
+            if (string.IsNullOrEmpty(cmbstatus.Text))
+            {
+                errorProvider.SetError(cmbstatus, "Please select a status.");
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        private void txtfarmname_TextChanged(object sender, EventArgs e)
+        {
+            errorProvider.SetError(txtfarmname, "");
+        }
+
+
+
 
 
 
@@ -219,6 +324,8 @@ namespace SmartFarmManagementSystem.AllForms
 
         private void btnsaveupdate_Click(object sender, EventArgs e)
         {
+                if (!ValidateField()) return;
+
             FieldBL field = new FieldBL(txtfieldname.Text, Convert.ToDouble(txtarea.Text), Convert.ToInt32(cmbsoiltypes.SelectedValue), Convert.ToInt32(cmbfarms.SelectedValue));
             if (selectedfieldid == -1)
             {
@@ -227,7 +334,7 @@ namespace SmartFarmManagementSystem.AllForms
                     MessageBox.Show("Successfully Added Field !");
                 ClearFieldFields();
                     loadfields();
-                    MainForm.LoadForm(new DashBoard());
+                 
                 }
             }
             else
@@ -248,7 +355,7 @@ namespace SmartFarmManagementSystem.AllForms
             {
                 DataGridViewRow row = dgvfields.Rows[e.RowIndex];
                 selectedfieldid = Convert.ToInt32(row.Cells["FieldID"].Value);
-                txtfieldname.Text = row.Cells["Name"].Value.ToString();
+                txtfieldname.Text = row.Cells["FieldName"].Value.ToString();
                 txtarea.Text = row.Cells["Area"].Value.ToString();
                 cmbsoiltypes.Text = row.Cells["SoilType"].Value.ToString();
                 cmbfarms.Text = row.Cells["FarmName"].Value.ToString();
@@ -292,11 +399,77 @@ namespace SmartFarmManagementSystem.AllForms
             txtarea.Clear();
             cmbfarms.SelectedIndex = -1;
             cmbsoiltypes.SelectedIndex = -1;
+            txtfieldname.Focus();
         }
 
         private void tabPage2_Click(object sender, EventArgs e)
         {
             loadcombofarms();
+        }
+
+
+       
+
+
+
+        private bool ValidateField()
+        {
+            errorProvider.Clear();
+            bool isValid = true;
+
+            if (Validator.IsEmpty(txtfieldname.Text))
+            {
+                errorProvider.SetError(txtfieldname, "Field name is required.");
+                isValid = false;
+            }
+
+            if (Validator.IsEmpty(txtarea.Text))
+            {
+                errorProvider.SetError(txtarea, "Area is required.");
+                isValid = false;
+            }
+            else if (!Validator.IsValidArea(txtarea.Text))
+            {
+                errorProvider.SetError(txtarea, "Area must be a positive number.");
+                isValid = false;
+            }
+
+            if (cmbfarms.SelectedValue == null)
+            {
+                errorProvider.SetError(cmbfarms, "Please select a farm.");
+                isValid = false;
+            }
+
+            if (cmbsoiltypes.SelectedValue == null)
+            {
+                errorProvider.SetError(cmbsoiltypes, "Please select a soil type.");
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        private void btnclear_Click(object sender, EventArgs e)
+        {
+            txtfarmname.Clear();
+            txtlocation.Clear();
+            cmbstatus.SelectedIndex = -1;
+            txtfarmname.Focus();
+        }
+
+        private void txtlocation_TextChanged(object sender, EventArgs e)
+        {
+            errorProvider.SetError(txtlocation, "");
+        }
+
+        private void txtfieldname_TextChanged(object sender, EventArgs e)
+        {
+            errorProvider.SetError(txtfieldname, "");
+        }
+
+        private void txtarea_TextChanged(object sender, EventArgs e)
+        {
+            errorProvider.SetError(txtarea, "");
         }
     }
 }

@@ -62,7 +62,12 @@ namespace SmartFarmManagementSystem
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+
             LoadForm(new DashBoard());
+            if (LoginInfo.role.ToLower() == "farmer")
+            {
+                btnlogs.Visible = false;
+            }
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -107,7 +112,7 @@ namespace SmartFarmManagementSystem
         private void btnfertilizer_Click(object sender, EventArgs e)
         {
             btnfertilizer.BackColor = Color.FromArgb(34, 139, 34);
-            MainForm.LoadForm(new Fertilizers());
+            MainForm.LoadForm(new FertilizerManagement());
         }
 
         private void btnsales_Click(object sender, EventArgs e)
@@ -160,6 +165,13 @@ namespace SmartFarmManagementSystem
         {
             btnreports.BackColor = Color.FromArgb(34, 139, 34);
             MainForm.LoadForm(new AllReports());
+
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            btnlogs.BackColor = Color.FromArgb(34, 139, 34);
+            MainForm.LoadForm(new Logs());
 
         }
     }

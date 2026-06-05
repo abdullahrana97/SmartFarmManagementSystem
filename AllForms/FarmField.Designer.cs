@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dgvfarm = new System.Windows.Forms.DataGridView();
@@ -55,6 +56,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtfieldname = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.lblfarmer = new System.Windows.Forms.Label();
+            this.cmbfarmer = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvfarm)).BeginInit();
@@ -62,6 +66,7 @@
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvfields)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -69,7 +74,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControl1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -84,11 +89,11 @@
             this.tabPage1.Controls.Add(this.btnclear);
             this.tabPage1.Controls.Add(this.btnsave);
             this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabPage1.Location = new System.Drawing.Point(4, 37);
+            this.tabPage1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage1.Location = new System.Drawing.Point(4, 41);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1238, 920);
+            this.tabPage1.Size = new System.Drawing.Size(1238, 916);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Farm ";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -98,7 +103,7 @@
             this.dgvfarm.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvfarm.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvfarm.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvfarm.Location = new System.Drawing.Point(3, 708);
+            this.dgvfarm.Location = new System.Drawing.Point(3, 704);
             this.dgvfarm.Name = "dgvfarm";
             this.dgvfarm.RowHeadersWidth = 62;
             this.dgvfarm.RowTemplate.Height = 28;
@@ -128,6 +133,7 @@
             this.btnclear.TabIndex = 5;
             this.btnclear.Text = "Clear";
             this.btnclear.UseVisualStyleBackColor = false;
+            this.btnclear.Click += new System.EventHandler(this.btnclear_Click);
             // 
             // btnsave
             // 
@@ -145,6 +151,8 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.LightGray;
+            this.groupBox1.Controls.Add(this.cmbfarmer);
+            this.groupBox1.Controls.Add(this.lblfarmer);
             this.groupBox1.Controls.Add(this.cmbstatus);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.txtlocation);
@@ -162,13 +170,14 @@
             // 
             // cmbstatus
             // 
+            this.cmbstatus.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cmbstatus.FormattingEnabled = true;
             this.cmbstatus.Items.AddRange(new object[] {
             "Active",
             "Inactive"});
             this.cmbstatus.Location = new System.Drawing.Point(40, 334);
             this.cmbstatus.Name = "cmbstatus";
-            this.cmbstatus.Size = new System.Drawing.Size(236, 36);
+            this.cmbstatus.Size = new System.Drawing.Size(236, 33);
             this.cmbstatus.TabIndex = 5;
             // 
             // label3
@@ -184,10 +193,12 @@
             // 
             // txtlocation
             // 
+            this.txtlocation.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtlocation.Location = new System.Drawing.Point(40, 212);
             this.txtlocation.Name = "txtlocation";
-            this.txtlocation.Size = new System.Drawing.Size(236, 34);
+            this.txtlocation.Size = new System.Drawing.Size(236, 31);
             this.txtlocation.TabIndex = 3;
+            this.txtlocation.TextChanged += new System.EventHandler(this.txtlocation_TextChanged);
             // 
             // label2
             // 
@@ -202,10 +213,12 @@
             // 
             // txtfarmname
             // 
+            this.txtfarmname.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtfarmname.Location = new System.Drawing.Point(40, 104);
             this.txtfarmname.Name = "txtfarmname";
-            this.txtfarmname.Size = new System.Drawing.Size(236, 34);
+            this.txtfarmname.Size = new System.Drawing.Size(236, 31);
             this.txtfarmname.TabIndex = 1;
+            this.txtfarmname.TextChanged += new System.EventHandler(this.txtfarmname_TextChanged);
             // 
             // label1
             // 
@@ -226,11 +239,11 @@
             this.tabPage2.Controls.Add(this.bttnClear);
             this.tabPage2.Controls.Add(this.btnsaveupdate);
             this.tabPage2.Controls.Add(this.groupBox2);
-            this.tabPage2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabPage2.Location = new System.Drawing.Point(4, 37);
+            this.tabPage2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage2.Location = new System.Drawing.Point(4, 41);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1238, 920);
+            this.tabPage2.Size = new System.Drawing.Size(1238, 916);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Field";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -241,7 +254,7 @@
             this.dgvfields.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvfields.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvfields.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvfields.Location = new System.Drawing.Point(3, 732);
+            this.dgvfields.Location = new System.Drawing.Point(3, 728);
             this.dgvfields.Name = "dgvfields";
             this.dgvfields.RowHeadersWidth = 62;
             this.dgvfields.RowTemplate.Height = 28;
@@ -297,7 +310,7 @@
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.txtfieldname);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.groupBox2.ForeColor = System.Drawing.Color.SeaGreen;
             this.groupBox2.Location = new System.Drawing.Point(275, 76);
             this.groupBox2.Name = "groupBox2";
@@ -311,7 +324,7 @@
             this.cmbsoiltypes.FormattingEnabled = true;
             this.cmbsoiltypes.Location = new System.Drawing.Point(308, 325);
             this.cmbsoiltypes.Name = "cmbsoiltypes";
-            this.cmbsoiltypes.Size = new System.Drawing.Size(189, 38);
+            this.cmbsoiltypes.Size = new System.Drawing.Size(189, 33);
             this.cmbsoiltypes.TabIndex = 8;
             // 
             // cmbfarms
@@ -319,7 +332,7 @@
             this.cmbfarms.FormattingEnabled = true;
             this.cmbfarms.Location = new System.Drawing.Point(32, 325);
             this.cmbfarms.Name = "cmbfarms";
-            this.cmbfarms.Size = new System.Drawing.Size(200, 38);
+            this.cmbfarms.Size = new System.Drawing.Size(200, 33);
             this.cmbfarms.TabIndex = 7;
             // 
             // label7
@@ -350,6 +363,7 @@
             this.txtarea.Name = "txtarea";
             this.txtarea.Size = new System.Drawing.Size(268, 31);
             this.txtarea.TabIndex = 3;
+            this.txtarea.TextChanged += new System.EventHandler(this.txtarea_TextChanged);
             // 
             // label5
             // 
@@ -369,6 +383,7 @@
             this.txtfieldname.Name = "txtfieldname";
             this.txtfieldname.Size = new System.Drawing.Size(268, 31);
             this.txtfieldname.TabIndex = 1;
+            this.txtfieldname.TextChanged += new System.EventHandler(this.txtfieldname_TextChanged);
             // 
             // label4
             // 
@@ -379,6 +394,33 @@
             this.label4.Size = new System.Drawing.Size(101, 25);
             this.label4.TabIndex = 0;
             this.label4.Text = "Field Name";
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            // 
+            // lblfarmer
+            // 
+            this.lblfarmer.AutoSize = true;
+            this.lblfarmer.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblfarmer.Location = new System.Drawing.Point(422, 54);
+            this.lblfarmer.Name = "lblfarmer";
+            this.lblfarmer.Size = new System.Drawing.Size(153, 25);
+            this.lblfarmer.TabIndex = 6;
+            this.lblfarmer.Text = "Assign To Farmer";
+            this.lblfarmer.UseMnemonic = false;
+            // 
+            // cmbfarmer
+            // 
+            this.cmbfarmer.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.cmbfarmer.FormattingEnabled = true;
+            this.cmbfarmer.Items.AddRange(new object[] {
+            "Active",
+            "Inactive"});
+            this.cmbfarmer.Location = new System.Drawing.Point(427, 104);
+            this.cmbfarmer.Name = "cmbfarmer";
+            this.cmbfarmer.Size = new System.Drawing.Size(236, 33);
+            this.cmbfarmer.TabIndex = 7;
             // 
             // FarmField
             // 
@@ -400,6 +442,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvfields)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -433,5 +476,8 @@
         private System.Windows.Forms.Button bttnClear;
         private System.Windows.Forms.Button btnsaveupdate;
         private System.Windows.Forms.DataGridView dgvfields;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.ComboBox cmbfarmer;
+        private System.Windows.Forms.Label lblfarmer;
     }
 }

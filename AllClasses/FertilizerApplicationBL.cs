@@ -83,20 +83,42 @@ namespace SmartFarmManagementSystem.AllClasses
 
         public DataTable loadApplications()
         {
-            string query = @"SELECT fa.ApplicationID,
-                            field.FieldID,
-                            field.Name AS FieldName,
-                            f.FertilizerID,
-                            f.Name AS Fertilizer,
-                            w.WorkerID,
-                            w.WorkerName AS Worker,
-                            fa.QuantityUsed,
-                            fa.ApplicationDate
-                            FROM fertilizerapplication fa
-                            JOIN field ON fa.FieldID = field.FieldID
-                            JOIN fertilizer f ON fa.FertilizerID = f.FertilizerID
-                            JOIN worker w ON fa.WorkerID = w.WorkerID
-                            ORDER BY fa.ApplicationDate DESC";
+            string query;
+            if (LoginInfo.role.ToLower() == "admin")
+                query = @"SELECT fa.ApplicationID,
+                  field.Name AS FieldName,
+                    field.FieldId,
+                  farm.Name AS FarmName,
+                  fert.Name AS Fertilizer,
+                    fert.FertilizerID,
+                  w.WorkerName AS Worker,
+                  w.WorkerID,
+                  fa.QuantityUsed,
+                  fa.ApplicationDate
+                  FROM fertilizerapplication fa
+                  JOIN field ON fa.FieldID = field.FieldID
+                  JOIN farm ON field.FarmID = farm.FarmID
+                  JOIN fertilizer fert ON fa.FertilizerID = fert.FertilizerID
+                  JOIN worker w ON fa.WorkerID = w.WorkerID
+                  ORDER BY fa.ApplicationDate DESC";
+            else
+                query = @"SELECT fa.ApplicationID,
+                  field.Name AS FieldName,
+                  farm.Name AS FarmName,
+                  field.FieldId,
+                  w.WorkerID,
+                  fert.Name AS Fertilizer,
+                  fert.FertilizerID,
+                  w.WorkerName AS Worker,
+                  fa.QuantityUsed,
+                  fa.ApplicationDate
+                  FROM fertilizerapplication fa
+                  JOIN field ON fa.FieldID = field.FieldID
+                  JOIN farm ON field.FarmID = farm.FarmID
+                  JOIN fertilizer fert ON fa.FertilizerID = fert.FertilizerID
+                  JOIN worker w ON fa.WorkerID = w.WorkerID
+                  WHERE farm.FarmerID = " + LoginInfo.userid + @"
+                  ORDER BY fa.ApplicationDate DESC";
 
             using (MySqlConnection con = DataBaseHelper.getconnection())
             {

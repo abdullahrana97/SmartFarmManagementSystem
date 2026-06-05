@@ -21,10 +21,7 @@ namespace SmartFarmManagementSystem.AllForms
             InitializeComponent();
         }
 
-        private void btndelete_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Payments cannot be deleted for audit purposes.");
-        }
+     
 
         private void LoadMethodItems()
         {
@@ -37,10 +34,9 @@ namespace SmartFarmManagementSystem.AllForms
 
         private void LoadSaleDropdown()
         {
-            string query = @"SELECT s.SaleID,
-                        CONCAT('Sale #',s.SaleID,' - ',b.Name) AS SaleName
-                        FROM sale s
-                        JOIN buyer b ON s.BuyerID = b.BuyerID";
+            string query = @"SELECT SaleID,
+                        CONCAT('Sale #',SaleID,' - ',BuyerName) AS SaleName
+                        FROM vw_salesdetails WHERE FarmerId =" + LoginInfo.userid;
 
             using (MySqlConnection con = DataBaseHelper.getconnection())
             {
@@ -61,6 +57,37 @@ namespace SmartFarmManagementSystem.AllForms
             }
         }
 
+        private bool ValidatePayment()
+        {
+            errorProvider.Clear();
+            bool isValid = true;
+
+            if (cmbsales.SelectedValue == null)
+            {
+                errorProvider.SetError(cmbsales, "Please select a sale.");
+                isValid = false;
+            }
+
+            if (Validator.IsEmpty(txtamount.Text))
+            {
+                errorProvider.SetError(txtamount, "Amount is required.");
+                isValid = false;
+            }
+            else if (!Validator.IsValidPrice(txtamount.Text))
+            {
+                errorProvider.SetError(txtamount, "Amount must be a positive number.");
+                isValid = false;
+            }
+
+            if (string.IsNullOrEmpty(cmbmethods.Text))
+            {
+                errorProvider.SetError(cmbmethods, "Please select payment method.");
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
         private void LoadPayments()
         {
             PaymentBL bl = new PaymentBL(0, 0, "", DateTime.Now);
@@ -79,6 +106,8 @@ namespace SmartFarmManagementSystem.AllForms
         {
             if (e.RowIndex >= 0)
             {
+                txtamount.Clear();
+                txtamount.Focus();
 
                 DataGridViewRow row = dgvpayments.Rows[e.RowIndex];
                 selectedpaymentid = Convert.ToInt32(row.Cells["PaymentID"].Value);
@@ -138,7 +167,12 @@ namespace SmartFarmManagementSystem.AllForms
 
         private void btnsave_Click_1(object sender, EventArgs e)
         {
+            if (!ValidatePayment())
+            {
+                return;
+            }
 
+            
             if (selectedpaymentid == -1)
             {
                 MessageBox.Show("Please select a payment to update.");
@@ -198,5 +232,20 @@ namespace SmartFarmManagementSystem.AllForms
                 LoadPayments();
             }
         }
+
+        private void cmbsales_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            errorProvider.SetError(cmbsales, "");   
         }
+
+        private void txtamount_TextChanged(object sender, EventArgs e)
+        {
+            errorProvider.SetError(txtamount, "");
+        }
+
+        private void cmbmethods_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            errorProvider.SetError(cmbmethods, "");
+        }
+    }
 }

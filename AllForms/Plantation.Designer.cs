@@ -28,7 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmbstatus = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.lblexpecteddate = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.dtpplantationdate = new System.Windows.Forms.DateTimePicker();
@@ -41,10 +44,10 @@
             this.btndelete = new System.Windows.Forms.Button();
             this.btnclear = new System.Windows.Forms.Button();
             this.btnsave = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.cmbstatus = new System.Windows.Forms.ComboBox();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvplantations)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -69,6 +72,26 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Let\'s Plant it";
+            // 
+            // cmbstatus
+            // 
+            this.cmbstatus.AccessibleRole = System.Windows.Forms.AccessibleRole.WhiteSpace;
+            this.cmbstatus.FormattingEnabled = true;
+            this.cmbstatus.Location = new System.Drawing.Point(390, 205);
+            this.cmbstatus.MaxDropDownItems = 100;
+            this.cmbstatus.Name = "cmbstatus";
+            this.cmbstatus.Size = new System.Drawing.Size(167, 36);
+            this.cmbstatus.TabIndex = 9;
+            this.cmbstatus.SelectedIndexChanged += new System.EventHandler(this.cmbstatus_SelectedIndexChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(385, 155);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(67, 28);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "Status";
             // 
             // lblexpecteddate
             // 
@@ -118,6 +141,7 @@
             this.cmbcrops.Name = "cmbcrops";
             this.cmbcrops.Size = new System.Drawing.Size(167, 36);
             this.cmbcrops.TabIndex = 3;
+            this.cmbcrops.SelectedIndexChanged += new System.EventHandler(this.cmbcrops_SelectedIndexChanged);
             // 
             // cmbfields
             // 
@@ -127,6 +151,7 @@
             this.cmbfields.Name = "cmbfields";
             this.cmbfields.Size = new System.Drawing.Size(167, 36);
             this.cmbfields.TabIndex = 2;
+            this.cmbfields.SelectedIndexChanged += new System.EventHandler(this.cmbfields_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -198,24 +223,9 @@
             this.btnsave.UseVisualStyleBackColor = false;
             this.btnsave.Click += new System.EventHandler(this.btnsave_Click);
             // 
-            // label5
+            // errorProvider
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(385, 155);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(67, 28);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "Status";
-            // 
-            // cmbstatus
-            // 
-            this.cmbstatus.AccessibleRole = System.Windows.Forms.AccessibleRole.WhiteSpace;
-            this.cmbstatus.FormattingEnabled = true;
-            this.cmbstatus.Location = new System.Drawing.Point(390, 205);
-            this.cmbstatus.MaxDropDownItems = 100;
-            this.cmbstatus.Name = "cmbstatus";
-            this.cmbstatus.Size = new System.Drawing.Size(167, 36);
-            this.cmbstatus.TabIndex = 9;
+            this.errorProvider.ContainerControl = this;
             // 
             // Plantation
             // 
@@ -235,6 +245,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvplantations)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -256,5 +267,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cmbstatus;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

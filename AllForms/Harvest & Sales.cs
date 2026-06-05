@@ -22,6 +22,7 @@ namespace SmartFarmManagementSystem.AllForms
         public Harvest___Sales()
         {
             InitializeComponent();
+            
         }
 
 
@@ -84,6 +85,13 @@ namespace SmartFarmManagementSystem.AllForms
 
         private void Harvest___Sales_Load(object sender, EventArgs e)
         {
+            if(LoginInfo.role.ToLower() == "farmer")
+            {
+                btndelete.Visible = false;
+                buttdelete.Visible = false;
+
+            }
+
             LoadPlantationDropdown();
             LoadHarvests();
             LoadHarvestDropdown();
@@ -94,6 +102,14 @@ namespace SmartFarmManagementSystem.AllForms
 
         private void btnsave_Click(object sender, EventArgs e)
         {
+
+            if (!ValidateHarvest())
+            {
+                MessageBox.Show("Please correct the errors and try again.");
+                return;
+            }
+
+
             if (cmbplantation.SelectedValue == null ||
                 string.IsNullOrEmpty(txtquantityharvested.Text))
             {
@@ -159,7 +175,7 @@ namespace SmartFarmManagementSystem.AllForms
                 selectedharvestid = Convert.ToInt32(row.Cells["HarvestID"].Value);
                 DataBaseHelper.SetComboValue(cmbplantation, "PlantationID",
                     Convert.ToInt32(row.Cells["PlantationID"].Value));
-                txtquantityharvested.Text = row.Cells["Quantity"].Value.ToString();
+                txtquantityharvested.Text = row.Cells["QuantityHarvested"].Value.ToString();
                 dtpharvestdate.Value = Convert.ToDateTime(row.Cells["HarvestDate"].Value);
             }
         }
@@ -171,6 +187,39 @@ namespace SmartFarmManagementSystem.AllForms
             txtquantityharvested.Clear();
             dtpharvestdate.Value = DateTime.Now;
         }
+
+        private bool ValidateHarvest()
+        {
+            errorProvider.Clear();
+            bool isValid = true;
+
+            if (cmbplantation.SelectedValue == null)
+            {
+                errorProvider.SetError(cmbplantation, "Please select a plantation.");
+                isValid = false;
+            }
+
+            if (Validator.IsEmpty(txtquantityharvested.Text))
+            {
+                errorProvider.SetError(txtquantityharvested, "Quantity is required.");
+                isValid = false;
+            }
+            else if (!Validator.IsValidQuantity(txtquantityharvested.Text))
+            {
+                errorProvider.SetError(txtquantityharvested, "Quantity must be a positive number.");
+                isValid = false;
+            }
+
+            if (dtpharvestdate.Value > DateTime.Now)
+            {
+                errorProvider.SetError(dtpharvestdate, "Harvest date cannot be in future.");
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+
 
 
 
@@ -247,7 +296,7 @@ namespace SmartFarmManagementSystem.AllForms
                 dgvsales.Columns["SaleID"].Visible = false;
                 dgvsales.Columns["HarvestID"].Visible = false;
                 dgvsales.Columns["BuyerID"].Visible = false;
-                dgvsales.Columns["PlantationID"].Visible = false;
+                dgvsales.Columns["FarmerID"].Visible = false;
                 
             }
 
@@ -302,7 +351,7 @@ namespace SmartFarmManagementSystem.AllForms
                 selectedsaleid = Convert.ToInt32(row.Cells["SaleID"].Value);
                 DataBaseHelper.SetComboValue(cmbbuyer, "BuyerID",
                     Convert.ToInt32(row.Cells["BuyerID"].Value));
-                txtquantity.Text = row.Cells["Quantity"].Value.ToString();
+                txtquantity.Text = row.Cells["QuantitytoSale"].Value.ToString();
                 txtprice.Text = row.Cells["Price"].Value.ToString();
                 dtpsaledate.Value = Convert.ToDateTime(row.Cells["SaleDate"].Value);
             }
@@ -324,13 +373,23 @@ namespace SmartFarmManagementSystem.AllForms
         }
         private void Sales_Click(object sender, EventArgs e)
         {
-            
+            if(LoginInfo.role.ToLower() != "admin")
+            {
+                buttdelete.Visible = false;
+            }
         }
 
       
 
         private void buttsave_Click_1(object sender, EventArgs e)
         {
+
+            if(!ValidateSale())
+            {
+                MessageBox.Show("Please correct the errors and try again.");
+                return;
+            }
+
             if (cmbharvest.SelectedValue == null ||
                            cmbbuyer.SelectedValue == null ||
                            string.IsNullOrEmpty(txtquantity.Text) ||
@@ -352,6 +411,33 @@ namespace SmartFarmManagementSystem.AllForms
                 return;
             }
 
+            // get harvested quantity from database
+            decimal harvestedQty = 0;
+            int harvestid = Convert.ToInt32(cmbharvest.SelectedValue);
+
+            using (MySqlConnection con = DataBaseHelper.getconnection())
+            {
+                try
+                {
+                    MySqlCommand cmd = new MySqlCommand(
+                        "SELECT Quantity FROM harvest WHERE HarvestID = @id", con);
+                    cmd.Parameters.AddWithValue("@id", harvestid);
+                    harvestedQty = Convert.ToDecimal(cmd.ExecuteScalar());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                    return;
+                }
+            }
+
+            // validating quantity against harvested quantity
+            if (qty > harvestedQty)
+            {
+                MessageBox.Show("Sale quantity " + qty + " kg cannot exceed " +"harvested quantity " + harvestedQty + " kg.");
+                return;
+            }
+
             SaleBL bl = new SaleBL(
                 Convert.ToInt32(cmbharvest.SelectedValue),
                 Convert.ToInt32(cmbbuyer.SelectedValue),
@@ -369,13 +455,97 @@ namespace SmartFarmManagementSystem.AllForms
         private void txtquantity_TextChanged(object sender, EventArgs e)
         {
             CalculateTotal();
+            errorProvider.SetError(txtquantity, "");
         }
 
         private void txtprice_TextChanged(object sender, EventArgs e)
         {
             CalculateTotal();
+            errorProvider.SetError(txtprice, "");   
         }
 
-    
+        private void cmbharvest_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            errorProvider.SetError(cmbharvest, ""); 
+
+
+            if (cmbharvest.SelectedValue == null) return;
+
+            int harvestid = Convert.ToInt32(cmbharvest.SelectedValue);
+
+            using (MySqlConnection con = DataBaseHelper.getconnection())
+            {
+                try
+                {
+                    MySqlCommand cmd = new MySqlCommand(
+                        "SELECT Quantity FROM harvest WHERE HarvestID = @id", con);
+                    cmd.Parameters.AddWithValue("@id", harvestid);
+                    decimal harvestedQty = Convert.ToDecimal(cmd.ExecuteScalar());
+                    lblavailablequantity.Text = "Available: " + harvestedQty + " kg";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+        }
+
+        private bool ValidateSale()
+        {
+            errorProvider.Clear();
+            bool isValid = true;
+
+            if (cmbharvest.SelectedValue == null)
+            {
+                errorProvider.SetError(cmbharvest, "Please select a harvest.");
+                isValid = false;
+            }
+
+            if (cmbbuyer.SelectedValue == null)
+            {
+                errorProvider.SetError(cmbbuyer, "Please select a buyer.");
+                isValid = false;
+            }
+
+            if (Validator.IsEmpty(txtquantity.Text))
+            {
+                errorProvider.SetError(txtquantity, "Quantity is required.");
+                isValid = false;
+            }
+            else if (!Validator.IsValidQuantity(txtquantity.Text))
+            {
+                errorProvider.SetError(txtquantity, "Quantity must be a positive number.");
+                isValid = false;
+            }
+
+            if (Validator.IsEmpty(txtprice.Text))
+            {
+                errorProvider.SetError(txtprice, "Price is required.");
+                isValid = false;
+            }
+            else if (!Validator.IsValidPrice(txtprice.Text))
+            {
+                errorProvider.SetError(txtprice, "Price must be a positive number.");
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        private void cmbplantation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            errorProvider.SetError(cmbplantation, "");
+
+        }
+
+        private void txtquantityharvested_TextChanged(object sender, EventArgs e)
+        {
+            errorProvider.SetError(txtquantityharvested, "");
+        }
+
+        private void cmbbuyer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            errorProvider.SetError(cmbbuyer, "");   
+        }
     }
 }

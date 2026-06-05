@@ -61,18 +61,36 @@ namespace SmartFarmManagementSystem.AllClasses
 
         public DataTable loadPayments()
         {
-            string query = @"SELECT 
-                    p.PaymentID, 
-                    p.SaleID,
-                    b.Name AS Buyer,
-                    (s.Quantity * s.Price) AS TotalAmount,
-                    p.Amount, 
-                    p.Method, 
-                    p.PaymentDate
-                    FROM payment p
-                    JOIN sale s ON p.SaleID = s.SaleID
-                    JOIN buyer b ON s.BuyerID = b.BuyerID
-                    ORDER BY p.PaymentDate DESC";
+            string query;
+            if (LoginInfo.role.ToLower() == "admin")
+                query = @"SELECT 
+                p.PaymentID, p.SaleID,
+                b.Name AS Buyer,
+                (s.Quantity * s.Price) AS TotalAmount,
+                p.Amount, p.Method, p.PaymentDate
+                FROM payment p
+                JOIN sale s ON p.SaleID = s.SaleID
+                JOIN buyer b ON s.BuyerID = b.BuyerID
+                JOIN harvest h ON s.HarvestID = h.HarvestID
+                JOIN plantation pl ON h.PlantationID = pl.PlantationID
+                JOIN field f ON pl.FieldID = f.FieldID
+                JOIN farm fm ON f.FarmID = fm.FarmID
+                ORDER BY p.PaymentDate DESC";
+            else
+                query = @"SELECT 
+                p.PaymentID, p.SaleID,
+                b.Name AS Buyer,
+                (s.Quantity * s.Price) AS TotalAmount,
+                p.Amount, p.Method, p.PaymentDate
+                FROM payment p
+                JOIN sale s ON p.SaleID = s.SaleID
+                JOIN buyer b ON s.BuyerID = b.BuyerID
+                JOIN harvest h ON s.HarvestID = h.HarvestID
+                JOIN plantation pl ON h.PlantationID = pl.PlantationID
+                JOIN field f ON pl.FieldID = f.FieldID
+                JOIN farm fm ON f.FarmID = fm.FarmID
+                WHERE fm.FarmerID = " + LoginInfo.userid + @"
+                ORDER BY p.PaymentDate DESC";
 
             using (MySqlConnection con = DataBaseHelper.getconnection())
             {

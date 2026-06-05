@@ -44,6 +44,7 @@
             this.btnfarmandfields = new System.Windows.Forms.Button();
             this.btndashboard = new System.Windows.Forms.Button();
             this.mainpanel = new System.Windows.Forms.Panel();
+            this.btnlogs = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -120,6 +121,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.panel2.Controls.Add(this.btnlogs);
             this.panel2.Controls.Add(this.btnreports);
             this.panel2.Controls.Add(this.btnpayments);
             this.panel2.Controls.Add(this.btnharvestandsales);
@@ -132,7 +134,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 71);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(238, 729);
+            this.panel2.Size = new System.Drawing.Size(238, 816);
             this.panel2.TabIndex = 2;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
@@ -304,18 +306,38 @@
             this.mainpanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainpanel.Location = new System.Drawing.Point(238, 71);
             this.mainpanel.Name = "mainpanel";
-            this.mainpanel.Size = new System.Drawing.Size(977, 729);
+            this.mainpanel.Size = new System.Drawing.Size(977, 816);
             this.mainpanel.TabIndex = 3;
+            // 
+            // btnlogs
+            // 
+            this.btnlogs.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnlogs.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnlogs.FlatAppearance.BorderSize = 0;
+            this.btnlogs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnlogs.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnlogs.ForeColor = System.Drawing.Color.White;
+            this.btnlogs.Location = new System.Drawing.Point(0, 660);
+            this.btnlogs.Name = "btnlogs";
+            this.btnlogs.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnlogs.Size = new System.Drawing.Size(238, 70);
+            this.btnlogs.TabIndex = 10;
+            this.btnlogs.Text = "📈 View System Logs";
+            this.btnlogs.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnlogs.UseVisualStyleBackColor = true;
+            this.btnlogs.Click += new System.EventHandler(this.button3_Click_1);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1215, 800);
+            this.ClientSize = new System.Drawing.Size(1215, 887);
+            this.ControlBox = false;
             this.Controls.Add(this.mainpanel);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MainForm";
             this.ShowIcon = false;
             this.Text = "Smart Farm Management";
@@ -348,6 +370,7 @@
         private System.Windows.Forms.Button btnharvestandsales;
         private System.Windows.Forms.Panel mainpanel;
         private System.Windows.Forms.Button btnreports;
+        private System.Windows.Forms.Button btnlogs;
     }
 }
 
