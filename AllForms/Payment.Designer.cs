@@ -50,6 +50,7 @@
             // 
             // dgvpayments
             // 
+            this.dgvpayments.AllowUserToAddRows = false;
             this.dgvpayments.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvpayments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvpayments.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -96,12 +97,13 @@
             this.label9.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.Location = new System.Drawing.Point(31, 149);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(80, 25);
+            this.label9.Size = new System.Drawing.Size(140, 25);
             this.label9.TabIndex = 12;
-            this.label9.Text = "Amount";
+            this.label9.Text = "Paying Amount";
             // 
             // cmbmethods
             // 
+            this.cmbmethods.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbmethods.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbmethods.FormattingEnabled = true;
             this.cmbmethods.Location = new System.Drawing.Point(36, 312);
@@ -140,6 +142,7 @@
             // 
             // cmbsales
             // 
+            this.cmbsales.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbsales.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbsales.FormattingEnabled = true;
             this.cmbsales.Location = new System.Drawing.Point(36, 95);
@@ -168,6 +171,7 @@
             this.btnclear.TabIndex = 30;
             this.btnclear.Text = "Clear";
             this.btnclear.UseVisualStyleBackColor = false;
+            this.btnclear.Click += new System.EventHandler(this.btnclear_Click);
             // 
             // btnsave
             // 

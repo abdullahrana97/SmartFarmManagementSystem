@@ -96,6 +96,7 @@
             // 
             // cmbreport
             // 
+            this.cmbreport.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbreport.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbreport.FormattingEnabled = true;
             this.cmbreport.Location = new System.Drawing.Point(226, 134);
@@ -137,6 +138,7 @@
             this.btnclear.TabIndex = 26;
             this.btnclear.Text = "Clear";
             this.btnclear.UseVisualStyleBackColor = false;
+            this.btnclear.Click += new System.EventHandler(this.btnclear_Click);
             // 
             // AllReports
             // 

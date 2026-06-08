@@ -32,6 +32,7 @@ namespace SmartFarmManagementSystem.AllForms
             {
                 DataGridViewRow row = dgvworkers.Rows[e.RowIndex];
                 selectedworkerid = Convert.ToInt32(row.Cells["WorkerId"].Value);
+                cmbfarmer.SelectedValue = Convert.ToInt32(row.Cells["FarmerID"].Value);
                 txtname.Text = row.Cells["WorkerName"].Value.ToString();
                 txtphone.Text = row.Cells["Phone"].Value.ToString();
                 cmbrole.SelectedItem = row.Cells["WorkerRole"].Value.ToString();

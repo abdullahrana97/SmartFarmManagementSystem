@@ -36,6 +36,8 @@
             this.btnclear = new System.Windows.Forms.Button();
             this.btnsave = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmbfarmer = new System.Windows.Forms.ComboBox();
+            this.lblfarmer = new System.Windows.Forms.Label();
             this.cmbstatus = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtlocation = new System.Windows.Forms.TextBox();
@@ -57,8 +59,6 @@
             this.txtfieldname = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.lblfarmer = new System.Windows.Forms.Label();
-            this.cmbfarmer = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvfarm)).BeginInit();
@@ -100,6 +100,7 @@
             // 
             // dgvfarm
             // 
+            this.dgvfarm.AllowUserToAddRows = false;
             this.dgvfarm.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvfarm.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvfarm.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -168,8 +169,33 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Farm Details";
             // 
+            // cmbfarmer
+            // 
+            this.cmbfarmer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbfarmer.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.cmbfarmer.FormattingEnabled = true;
+            this.cmbfarmer.Items.AddRange(new object[] {
+            "Active",
+            "Inactive"});
+            this.cmbfarmer.Location = new System.Drawing.Point(427, 104);
+            this.cmbfarmer.Name = "cmbfarmer";
+            this.cmbfarmer.Size = new System.Drawing.Size(236, 33);
+            this.cmbfarmer.TabIndex = 7;
+            // 
+            // lblfarmer
+            // 
+            this.lblfarmer.AutoSize = true;
+            this.lblfarmer.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblfarmer.Location = new System.Drawing.Point(422, 54);
+            this.lblfarmer.Name = "lblfarmer";
+            this.lblfarmer.Size = new System.Drawing.Size(153, 25);
+            this.lblfarmer.TabIndex = 6;
+            this.lblfarmer.Text = "Assign To Farmer";
+            this.lblfarmer.UseMnemonic = false;
+            // 
             // cmbstatus
             // 
+            this.cmbstatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbstatus.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cmbstatus.FormattingEnabled = true;
             this.cmbstatus.Items.AddRange(new object[] {
@@ -251,6 +277,7 @@
             // 
             // dgvfields
             // 
+            this.dgvfields.AllowUserToAddRows = false;
             this.dgvfields.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvfields.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvfields.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -321,6 +348,7 @@
             // 
             // cmbsoiltypes
             // 
+            this.cmbsoiltypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbsoiltypes.FormattingEnabled = true;
             this.cmbsoiltypes.Location = new System.Drawing.Point(308, 325);
             this.cmbsoiltypes.Name = "cmbsoiltypes";
@@ -329,11 +357,13 @@
             // 
             // cmbfarms
             // 
+            this.cmbfarms.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbfarms.FormattingEnabled = true;
             this.cmbfarms.Location = new System.Drawing.Point(32, 325);
             this.cmbfarms.Name = "cmbfarms";
             this.cmbfarms.Size = new System.Drawing.Size(200, 33);
             this.cmbfarms.TabIndex = 7;
+            this.cmbfarms.SelectedIndexChanged += new System.EventHandler(this.cmbfarms_SelectedIndexChanged);
             // 
             // label7
             // 
@@ -398,29 +428,6 @@
             // errorProvider
             // 
             this.errorProvider.ContainerControl = this;
-            // 
-            // lblfarmer
-            // 
-            this.lblfarmer.AutoSize = true;
-            this.lblfarmer.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblfarmer.Location = new System.Drawing.Point(422, 54);
-            this.lblfarmer.Name = "lblfarmer";
-            this.lblfarmer.Size = new System.Drawing.Size(153, 25);
-            this.lblfarmer.TabIndex = 6;
-            this.lblfarmer.Text = "Assign To Farmer";
-            this.lblfarmer.UseMnemonic = false;
-            // 
-            // cmbfarmer
-            // 
-            this.cmbfarmer.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.cmbfarmer.FormattingEnabled = true;
-            this.cmbfarmer.Items.AddRange(new object[] {
-            "Active",
-            "Inactive"});
-            this.cmbfarmer.Location = new System.Drawing.Point(427, 104);
-            this.cmbfarmer.Name = "cmbfarmer";
-            this.cmbfarmer.Size = new System.Drawing.Size(236, 33);
-            this.cmbfarmer.TabIndex = 7;
             // 
             // FarmField
             // 

@@ -155,8 +155,8 @@ namespace SmartFarmManagementSystem.AllForms
             {
                 DataGridViewRow row = dgvplantations.Rows[e.RowIndex];
                 selectedplantationid = Convert.ToInt32(row.Cells["PlantationID"].Value);
-                cmbfields.Text = row.Cells["FieldName"].Value.ToString();
-                cmbcrops.Text = row.Cells["CropName"].Value.ToString();
+               cmbfields.SelectedValue = Convert.ToInt32(row.Cells["FieldID"].Value);
+                cmbcrops.SelectedValue = Convert.ToInt32(row.Cells["CropID"].Value);
                 cmbstatus.Text = row.Cells["status"].Value.ToString();
                 dtpplantationdate.Value = Convert.ToDateTime(row.Cells["PlantingDate"].Value);
                 lblexpecteddate.Text = Convert.ToDateTime(row.Cells["ExpectedHarvestDate"].Value).ToString("dd MMM yyyy");
@@ -243,6 +243,8 @@ namespace SmartFarmManagementSystem.AllForms
             PlantationBL plantation = new PlantationBL(0, 0, DateTime.Now,"");
             dgvplantations.DataSource = plantation.loaddgvplantations();
             dgvplantations.Columns["PlantationID"].Visible = false;
+            dgvplantations.Columns["FieldId"].Visible = false;
+            dgvplantations.Columns["CropId"].Visible = false;
             dgvplantations.Columns["FarmerID"].Visible = false;
         }
 

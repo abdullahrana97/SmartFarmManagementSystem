@@ -46,6 +46,7 @@
             // 
             // dgvbuyers
             // 
+            this.dgvbuyers.AllowUserToAddRows = false;
             this.dgvbuyers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvbuyers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvbuyers.Dock = System.Windows.Forms.DockStyle.Bottom;

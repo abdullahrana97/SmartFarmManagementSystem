@@ -41,7 +41,7 @@ namespace SmartFarmManagementSystem.AllForms
                           FROM plantation p
                           JOIN crop c ON p.CropID = c.CropID
                           JOIN field f ON p.FieldID = f.FieldID
-                          WHERE p.status = 'Active'";
+                          WHERE p.status IN ('Active','Harvested')";
             else
                 query = @"SELECT p.PlantationID,
                           CONCAT(c.Name,' - ',f.Name) AS PlantationName
@@ -49,7 +49,7 @@ namespace SmartFarmManagementSystem.AllForms
                           JOIN crop c ON p.CropID = c.CropID
                           JOIN field f ON p.FieldID = f.FieldID
                           JOIN farm fm ON f.FarmID = fm.FarmID
-                          WHERE p.status = 'Active'
+                          WHERE p.status IN ('Active','Harvested')
                           AND fm.FarmerID = " + LoginInfo.userid;
 
             using (MySqlConnection con = DataBaseHelper.getconnection())
@@ -173,8 +173,7 @@ namespace SmartFarmManagementSystem.AllForms
             {
                 DataGridViewRow row = dgvharvest.Rows[e.RowIndex];
                 selectedharvestid = Convert.ToInt32(row.Cells["HarvestID"].Value);
-                DataBaseHelper.SetComboValue(cmbplantation, "PlantationID",
-                    Convert.ToInt32(row.Cells["PlantationID"].Value));
+                cmbplantation.SelectedValue =Convert.ToInt32(row.Cells["PlantationID"].Value);
                 txtquantityharvested.Text = row.Cells["QuantityHarvested"].Value.ToString();
                 dtpharvestdate.Value = Convert.ToDateTime(row.Cells["HarvestDate"].Value);
             }
@@ -295,6 +294,7 @@ namespace SmartFarmManagementSystem.AllForms
                 dgvsales.DataSource = dt;
                 dgvsales.Columns["SaleID"].Visible = false;
                 dgvsales.Columns["HarvestID"].Visible = false;
+              
                 dgvsales.Columns["BuyerID"].Visible = false;
                 dgvsales.Columns["FarmerID"].Visible = false;
                 
@@ -351,6 +351,12 @@ namespace SmartFarmManagementSystem.AllForms
                 selectedsaleid = Convert.ToInt32(row.Cells["SaleID"].Value);
                 DataBaseHelper.SetComboValue(cmbbuyer, "BuyerID",
                     Convert.ToInt32(row.Cells["BuyerID"].Value));
+
+
+                cmbharvest.SelectedValue =
+                    Convert.ToInt32(row.Cells["HarvestID"].Value);
+
+
                 txtquantity.Text = row.Cells["QuantitytoSale"].Value.ToString();
                 txtprice.Text = row.Cells["Price"].Value.ToString();
                 dtpsaledate.Value = Convert.ToDateTime(row.Cells["SaleDate"].Value);

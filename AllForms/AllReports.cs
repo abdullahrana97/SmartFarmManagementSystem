@@ -424,5 +424,11 @@ namespace SmartFarmManagementSystem.AllForms
             }
             ShowReport(dt, "dsFertilizerApp", "FertilizerApplicationReport.rdlc");
         }
+
+        private void btnclear_Click(object sender, EventArgs e)
+        {
+            cmbreport.SelectedIndex = -1;
+            
+        }
     }
 }

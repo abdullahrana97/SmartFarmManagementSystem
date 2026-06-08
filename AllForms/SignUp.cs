@@ -112,5 +112,12 @@ namespace SmartFarmManagementSystem.AllForms
         {
             pictureBox1.BackColor = Color.FromArgb(34, 139, 34);
         }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Login login = new Login();
+            login.Show();
+            this.Close();
+        }
     }
 }

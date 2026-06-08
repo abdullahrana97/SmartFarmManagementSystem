@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.btngeneratereport = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // reportViewer1
@@ -37,14 +38,28 @@
             this.reportViewer1.Location = new System.Drawing.Point(0, 0);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.ServerReport.BearerToken = null;
-            this.reportViewer1.Size = new System.Drawing.Size(800, 450);
+            this.reportViewer1.Size = new System.Drawing.Size(1443, 950);
             this.reportViewer1.TabIndex = 0;
+            // 
+            // btngeneratereport
+            // 
+            this.btngeneratereport.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.btngeneratereport.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btngeneratereport.ForeColor = System.Drawing.Color.White;
+            this.btngeneratereport.Location = new System.Drawing.Point(12, 875);
+            this.btngeneratereport.Name = "btngeneratereport";
+            this.btngeneratereport.Size = new System.Drawing.Size(207, 75);
+            this.btngeneratereport.TabIndex = 26;
+            this.btngeneratereport.Text = "Back to Reports";
+            this.btngeneratereport.UseVisualStyleBackColor = false;
+            this.btngeneratereport.Click += new System.EventHandler(this.btngeneratereport_Click);
             // 
             // ReportViewerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1443, 950);
+            this.Controls.Add(this.btngeneratereport);
             this.Controls.Add(this.reportViewer1);
             this.Name = "ReportViewerForm";
             this.Text = "ReportViewerForm";
@@ -56,5 +71,6 @@
         #endregion
 
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
+        private System.Windows.Forms.Button btngeneratereport;
     }
 }

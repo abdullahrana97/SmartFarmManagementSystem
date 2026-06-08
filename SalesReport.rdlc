@@ -406,7 +406,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!SaleDate.Value</Value>
+                              <Value>=Format(Fields!SaleDate.Value, "dd MMM yyyy")</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -425,6 +425,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>

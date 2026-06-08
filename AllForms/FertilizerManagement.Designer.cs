@@ -28,13 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Fertilizer = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.dgvfertilizers = new System.Windows.Forms.DataGridView();
             this.btndelete = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -44,6 +42,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnclear = new System.Windows.Forms.Button();
             this.btnsave = new System.Windows.Forms.Button();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.butdelete = new System.Windows.Forms.Button();
             this.butclear = new System.Windows.Forms.Button();
             this.butsave = new System.Windows.Forms.Button();
@@ -55,6 +54,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.buttdelete = new System.Windows.Forms.Button();
             this.buttclear = new System.Windows.Forms.Button();
             this.buttsave = new System.Windows.Forms.Button();
@@ -73,12 +73,12 @@
             this.label8 = new System.Windows.Forms.Label();
             this.Fertilizer.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvfertilizers)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvfertilizerstock)).BeginInit();
             this.groupBox2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvapplication)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
@@ -113,68 +113,38 @@
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.butdelete);
-            this.tabPage2.Controls.Add(this.butclear);
-            this.tabPage2.Controls.Add(this.butsave);
-            this.tabPage2.Controls.Add(this.dgvfertilizerstock);
-            this.tabPage2.Controls.Add(this.groupBox2);
-            this.tabPage2.Location = new System.Drawing.Point(4, 31);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1217, 870);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Stock";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.buttdelete);
-            this.tabPage3.Controls.Add(this.buttclear);
-            this.tabPage3.Controls.Add(this.buttsave);
-            this.tabPage3.Controls.Add(this.dgvapplication);
-            this.tabPage3.Controls.Add(this.groupBox3);
-            this.tabPage3.Location = new System.Drawing.Point(4, 31);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1217, 870);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Fertliizer Application";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
             // dgvfertilizers
             // 
+            this.dgvfertilizers.AllowUserToAddRows = false;
             this.dgvfertilizers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle31.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle31.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle31.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle31.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle31.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvfertilizers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle31;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvfertilizers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvfertilizers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle32.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle32.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle32.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle32.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle32.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvfertilizers.DefaultCellStyle = dataGridViewCellStyle32;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvfertilizers.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvfertilizers.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgvfertilizers.Location = new System.Drawing.Point(3, 698);
             this.dgvfertilizers.Name = "dgvfertilizers";
-            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle33.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle33.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle33.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle33.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle33.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle33.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvfertilizers.RowHeadersDefaultCellStyle = dataGridViewCellStyle33;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvfertilizers.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvfertilizers.RowHeadersWidth = 62;
             this.dgvfertilizers.RowTemplate.Height = 28;
             this.dgvfertilizers.Size = new System.Drawing.Size(1211, 169);
@@ -211,6 +181,7 @@
             // 
             // cmbtype
             // 
+            this.cmbtype.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbtype.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbtype.FormattingEnabled = true;
             this.cmbtype.Location = new System.Drawing.Point(36, 279);
@@ -272,6 +243,22 @@
             this.btnsave.UseVisualStyleBackColor = false;
             this.btnsave.Click += new System.EventHandler(this.btnsave_Click);
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.butdelete);
+            this.tabPage2.Controls.Add(this.butclear);
+            this.tabPage2.Controls.Add(this.butsave);
+            this.tabPage2.Controls.Add(this.dgvfertilizerstock);
+            this.tabPage2.Controls.Add(this.groupBox2);
+            this.tabPage2.Location = new System.Drawing.Point(4, 31);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1217, 870);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Stock";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
+            // 
             // butdelete
             // 
             this.butdelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
@@ -311,6 +298,7 @@
             // 
             // dgvfertilizerstock
             // 
+            this.dgvfertilizerstock.AllowUserToAddRows = false;
             this.dgvfertilizerstock.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvfertilizerstock.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvfertilizerstock.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -360,6 +348,7 @@
             // 
             // cmbfertilizer
             // 
+            this.cmbfertilizer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbfertilizer.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbfertilizer.FormattingEnabled = true;
             this.cmbfertilizer.Location = new System.Drawing.Point(36, 91);
@@ -396,6 +385,21 @@
             this.label5.Size = new System.Drawing.Size(140, 25);
             this.label5.TabIndex = 0;
             this.label5.Text = "Fertilizer Name";
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.buttdelete);
+            this.tabPage3.Controls.Add(this.buttclear);
+            this.tabPage3.Controls.Add(this.buttsave);
+            this.tabPage3.Controls.Add(this.dgvapplication);
+            this.tabPage3.Controls.Add(this.groupBox3);
+            this.tabPage3.Location = new System.Drawing.Point(4, 31);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(1217, 870);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Fertliizer Application";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // buttdelete
             // 
@@ -436,6 +440,7 @@
             // 
             // dgvapplication
             // 
+            this.dgvapplication.AllowUserToAddRows = false;
             this.dgvapplication.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvapplication.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvapplication.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -490,6 +495,7 @@
             // 
             // cmbworker
             // 
+            this.cmbworker.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbworker.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbworker.FormattingEnabled = true;
             this.cmbworker.Location = new System.Drawing.Point(31, 324);
@@ -519,6 +525,7 @@
             // 
             // cmbfertilizername
             // 
+            this.cmbfertilizername.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbfertilizername.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbfertilizername.FormattingEnabled = true;
             this.cmbfertilizername.Location = new System.Drawing.Point(31, 207);
@@ -537,6 +544,7 @@
             // 
             // cmbfieldname
             // 
+            this.cmbfieldname.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbfieldname.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbfieldname.FormattingEnabled = true;
             this.cmbfieldname.Location = new System.Drawing.Point(36, 91);
@@ -584,14 +592,14 @@
             this.Load += new System.EventHandler(this.FertilizerManagement_Load);
             this.Fertilizer.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvfertilizers)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvfertilizerstock)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvapplication)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();

@@ -51,7 +51,7 @@ namespace SmartFarmManagementSystem.AllForms
         {
             if (LoginInfo.role.ToLower() == "admin")
             {
-                string query = $"SELECT f.FarmID, f.Name, f.Location, f.Status, u.Username AS AssignedTo FROM farm f INNER JOIN user u ON f.FarmerID = u.UserID";
+                string query = $"SELECT f.FarmID,f.FarmerID ,f.Name, f.Location, f.Status, u.Username AS AssignedTo FROM farm f INNER JOIN user u ON f.FarmerID = u.UserID";
 
                 using (MySqlConnection con = DataBaseHelper.getconnection())
                 {
@@ -76,7 +76,7 @@ namespace SmartFarmManagementSystem.AllForms
 
             else if (LoginInfo.role.ToLower() == "farmer")
             {
-                string query = "SELECT f.FarmID, f.Name, f.Location, f.Status, u.Username AS AssignedTo FROM farm f INNER JOIN user u ON f.FarmerID = u.UserID WHERE f.FarmerID = " + LoginInfo.userid;
+                string query = "SELECT f.FarmID,f.FarmerID, f.Name, f.Location, f.Status, u.Username AS AssignedTo FROM farm f INNER JOIN user u ON f.FarmerID = u.UserID WHERE f.FarmerID = " + LoginInfo.userid;
                 using (MySqlConnection con = DataBaseHelper.getconnection())
                 {
                     try
@@ -87,6 +87,7 @@ namespace SmartFarmManagementSystem.AllForms
                         adp.Fill(dt);
                         dgvfarm.DataSource = dt;
                         dgvfarm.Columns["FarmID"].Visible = false;
+                        dgvfarm.Columns["FarmerID"].Visible = false;
                     }
 
                     catch (Exception ex)
@@ -214,6 +215,7 @@ namespace SmartFarmManagementSystem.AllForms
             txtfarmname.Clear();
             txtlocation.Clear();
             cmbstatus.SelectedIndex = -1;
+            cmbfarmer.SelectedIndex = -1;
         }
 
         private void dgvfarm_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -223,6 +225,7 @@ namespace SmartFarmManagementSystem.AllForms
                 DataGridViewRow row = dgvfarm.Rows[e.RowIndex];
                 selectedfarmid = Convert.ToInt32(row.Cells["FarmID"].Value);
                 txtfarmname.Text = row.Cells["Name"].Value.ToString();
+                cmbfarmer.SelectedValue = Convert.ToInt32(row.Cells["FarmerID"].Value);
                 txtlocation.Text = row.Cells["Location"].Value.ToString();
                 cmbstatus.Text = row.Cells["Status"].Value.ToString();
             }
@@ -470,6 +473,11 @@ namespace SmartFarmManagementSystem.AllForms
         private void txtarea_TextChanged(object sender, EventArgs e)
         {
             errorProvider.SetError(txtarea, "");
+        }
+
+        private void cmbfarms_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

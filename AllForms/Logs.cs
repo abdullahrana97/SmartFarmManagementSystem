@@ -26,9 +26,13 @@ namespace SmartFarmManagementSystem.AllForms
             cmbTableFilter.Items.Add("farm");
             cmbTableFilter.Items.Add("field");
             cmbTableFilter.Items.Add("plantation");
-            cmbTableFilter.Items.Add("worker");
-            cmbTableFilter.Items.Add("task");
-            cmbTableFilter.Items.Add("sale");
+            cmbTableFilter.Items.Add("worker");  
+            cmbTableFilter.Items.Add("task");      
+            cmbTableFilter.Items.Add("sale");     
+            cmbTableFilter.Items.Add("buyer");     
+            cmbTableFilter.Items.Add("harvest");   
+            cmbTableFilter.Items.Add("fertilizerapplication"); 
+            cmbTableFilter.Items.Add("fertilizerstock");
         }
 
         private void LoadActFilterItems()
@@ -69,16 +73,68 @@ namespace SmartFarmManagementSystem.AllForms
                 }
             }
         }
+        // tables that have both INSERT and DELETE logs
+        private List<string> bothActionTables = new List<string>
+         {
+                  "farm"  // has insert trigger + delete trigger
+          };
+
+        // tables that only have DELETE logs
+        private List<string> deleteOnlyTables = new List<string>
+        {
+               "field",
+                "worker",
+                "task",
+                "sale",
+                "buyer",
+                "fertilizerapplication",
+                "fertilizerstock",
+                "harvest",
+                "plantation"
+        };
 
         private void Logs_Load(object sender, EventArgs e)
         {
             LoadActFilterItems();
             LoadTableFilterItems();
-            LoadLogs();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            LoadLogs();
+        }
+
+        private void cmbTableFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedTable = cmbTableFilter.Text;
+
+            cmbActionType.Items.Clear();
+        
+
+            if (selectedTable == "All Tables")
+            {
+                // show all options
+                cmbActionType.Items.Add("INSERT");
+                cmbActionType.Items.Add("DELETE");
+                lblinfo.Text = ""; 
+            }
+            else if (bothActionTables.Contains(selectedTable))
+            {
+                // has both insert and delete logs
+                cmbActionType.Items.Add("INSERT");
+                cmbActionType.Items.Add("DELETE");
+            }
+            else if (deleteOnlyTables.Contains(selectedTable))
+            {
+                // only delete logs exist for this table
+                cmbActionType.Items.Add("DELETE");
+
+                // show info to user
+                lblinfo.Text = "Only DELETE logs available for " + selectedTable;
+                lblinfo.ForeColor = Color.Blue;
+            }
+
+            cmbActionType.SelectedIndex = 0;
             LoadLogs();
         }
     }

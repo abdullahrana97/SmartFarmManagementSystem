@@ -372,7 +372,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!ApplicationDate.Value</Value>
+                              <Value>=Format(Fields!ApplicationDate.Value, "dd MMM yyyy")</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -391,6 +391,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>

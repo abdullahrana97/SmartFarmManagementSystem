@@ -34,7 +34,17 @@ namespace SmartFarmManagementSystem.AllForms
 
         private void LoadSaleDropdown()
         {
-            string query = @"SELECT SaleID,
+            string query;
+
+
+            if (LoginInfo.role.ToLower() == "admin")
+            {
+                 query = @"SELECT SaleID,
+                          CONCAT('Sale #',SaleID,' - ',BuyerName) AS SaleName
+                          FROM vw_salesdetails";
+            }
+            else
+            query = @"SELECT SaleID,
                         CONCAT('Sale #',SaleID,' - ',BuyerName) AS SaleName
                         FROM vw_salesdetails WHERE FarmerId =" + LoginInfo.userid;
 
@@ -111,13 +121,15 @@ namespace SmartFarmManagementSystem.AllForms
 
                 DataGridViewRow row = dgvpayments.Rows[e.RowIndex];
                 selectedpaymentid = Convert.ToInt32(row.Cells["PaymentID"].Value);
-                DataBaseHelper.SetComboValue(cmbsales, "SaleID",
-                    Convert.ToInt32(row.Cells["SaleID"].Value));
+               cmbsales.SelectedValue = Convert.ToInt32(row.Cells["SaleID"].Value);
 
                 txtamount.Clear();
                 txtamount.Focus();
 
                 txtamount.Text = row.Cells["Amount"].Value.ToString();
+                txtamount.Clear();
+                txtamount.Focus();
+
                 cmbmethods.Text = row.Cells["Method"].Value.ToString();
                 dtppaymentdate.Value = Convert.ToDateTime(row.Cells["PaymentDate"].Value);
 
@@ -246,6 +258,11 @@ namespace SmartFarmManagementSystem.AllForms
         private void cmbmethods_SelectedIndexChanged(object sender, EventArgs e)
         {
             errorProvider.SetError(cmbmethods, "");
+        }
+
+        private void btnclear_Click(object sender, EventArgs e)
+        {
+            ClearFields();
         }
     }
 }

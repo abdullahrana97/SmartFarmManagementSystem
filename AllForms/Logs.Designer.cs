@@ -35,6 +35,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvlogs = new System.Windows.Forms.DataGridView();
+            this.lblinfo = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvlogs)).BeginInit();
             this.SuspendLayout();
@@ -70,6 +71,7 @@
             // 
             // cmbActionType
             // 
+            this.cmbActionType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbActionType.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbActionType.FormattingEnabled = true;
             this.cmbActionType.Location = new System.Drawing.Point(36, 232);
@@ -79,12 +81,14 @@
             // 
             // cmbTableFilter
             // 
+            this.cmbTableFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTableFilter.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbTableFilter.FormattingEnabled = true;
             this.cmbTableFilter.Location = new System.Drawing.Point(36, 122);
             this.cmbTableFilter.Name = "cmbTableFilter";
             this.cmbTableFilter.Size = new System.Drawing.Size(195, 29);
             this.cmbTableFilter.TabIndex = 5;
+            this.cmbTableFilter.SelectedIndexChanged += new System.EventHandler(this.cmbTableFilter_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -118,12 +122,23 @@
             this.dgvlogs.Size = new System.Drawing.Size(1225, 374);
             this.dgvlogs.TabIndex = 20;
             // 
+            // lblinfo
+            // 
+            this.lblinfo.AutoSize = true;
+            this.lblinfo.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblinfo.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lblinfo.Location = new System.Drawing.Point(916, 197);
+            this.lblinfo.Name = "lblinfo";
+            this.lblinfo.Size = new System.Drawing.Size(0, 28);
+            this.lblinfo.TabIndex = 21;
+            // 
             // Logs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(1225, 905);
+            this.Controls.Add(this.lblinfo);
             this.Controls.Add(this.dgvlogs);
             this.Controls.Add(this.groupBox1);
             this.Name = "Logs";
@@ -133,6 +148,7 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvlogs)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -145,5 +161,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvlogs;
+        private System.Windows.Forms.Label lblinfo;
     }
 }

@@ -101,6 +101,7 @@
             // 
             // dgvharvest
             // 
+            this.dgvharvest.AllowUserToAddRows = false;
             this.dgvharvest.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvharvest.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvharvest.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -162,6 +163,7 @@
             // 
             // cmbplantation
             // 
+            this.cmbplantation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbplantation.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbplantation.FormattingEnabled = true;
             this.cmbplantation.Location = new System.Drawing.Point(36, 125);
@@ -266,6 +268,7 @@
             // 
             // dgvsales
             // 
+            this.dgvsales.AllowUserToAddRows = false;
             this.dgvsales.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvsales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvsales.Dock = System.Windows.Forms.DockStyle.Bottom;

@@ -76,6 +76,7 @@
             // cmbstatus
             // 
             this.cmbstatus.AccessibleRole = System.Windows.Forms.AccessibleRole.WhiteSpace;
+            this.cmbstatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbstatus.FormattingEnabled = true;
             this.cmbstatus.Location = new System.Drawing.Point(390, 205);
             this.cmbstatus.MaxDropDownItems = 100;
@@ -135,6 +136,7 @@
             // 
             // cmbcrops
             // 
+            this.cmbcrops.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbcrops.FormattingEnabled = true;
             this.cmbcrops.Location = new System.Drawing.Point(32, 205);
             this.cmbcrops.MaxDropDownItems = 100;
@@ -145,6 +147,7 @@
             // 
             // cmbfields
             // 
+            this.cmbfields.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbfields.FormattingEnabled = true;
             this.cmbfields.Location = new System.Drawing.Point(32, 89);
             this.cmbfields.MaxDropDownItems = 100;
@@ -175,6 +178,7 @@
             // 
             // dgvplantations
             // 
+            this.dgvplantations.AllowUserToAddRows = false;
             this.dgvplantations.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvplantations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvplantations.Dock = System.Windows.Forms.DockStyle.Bottom;

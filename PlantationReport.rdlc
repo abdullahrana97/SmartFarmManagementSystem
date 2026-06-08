@@ -345,7 +345,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!PlantingDate.Value</Value>
+                              <Value>=Format(Fields!PlantingDate.Value, "dd MMM yyyy")</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -375,7 +375,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!ExpectedHarvestDate.Value</Value>
+                              <Value>=Format(Fields!ExpectedHarvestDate.Value, "dd MMM yyyy")</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -394,6 +394,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>

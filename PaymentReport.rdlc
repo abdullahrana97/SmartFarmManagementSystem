@@ -160,7 +160,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Amount</Value>
+                              <Value>AmountPaid</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -405,7 +405,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!PaymentDate.Value</Value>
+                              <Value>=Format(Fields!PaymentDate.Value, "dd MMM yyyy")</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>

@@ -38,5 +38,10 @@ namespace SmartFarmManagementSystem.AllForms
 
 
         }
+
+        private void btngeneratereport_Click(object sender, EventArgs e)
+        {
+            MainForm.LoadForm(new AllReports());
+        }
     }
 }
